@@ -10,8 +10,9 @@ import Combine
 
 final class SharedState: ObservableObject {
   @Published var isSecondScreenVisible = false
-
   @Published var quiz: Quiz
+  @Published var questionIndex: Int = 0
+  var currentQuestion: Question { quiz.questions[questionIndex] }
 
   init() {
     let fixturePath = Bundle.main.path(forResource: "quiz", ofType: "json")

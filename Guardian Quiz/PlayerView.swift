@@ -11,15 +11,10 @@ struct PlayerView: View {
   @EnvironmentObject var sharedState: SharedState
 
   var body: some View {
-    VStack {
-      Spacer()
-      HStack {
-        Text("Question 1")
+    HStack {
+      VStack(alignment: .leading) {
         Spacer()
-      }
-      HStack {
-        Text(sharedState.quiz.questions.first?.question ?? "No questions loaded")
-          .font(.largeTitle)
+        QuestionView(question: sharedState.currentQuestion)
         Spacer()
       }
       Spacer()

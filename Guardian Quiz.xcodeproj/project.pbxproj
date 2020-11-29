@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F46179DB257422B3002DF623 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46179DA257422B3002DF623 /* QuestionView.swift */; };
 		F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */; };
 		F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */; };
 		F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F46179DA257422B3002DF623 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		F4FE4AE82573AB5C00E97C92 /* Guardian Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guardian Quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizmasterSceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				F4FE4AF62573AB5D00E97C92 /* LaunchScreen.storyboard */,
 				F4FE4AF92573AB5D00E97C92 /* Info.plist */,
 				F4FE4AF32573AB5D00E97C92 /* Preview Content */,
+				F46179DA257422B3002DF623 /* QuestionView.swift */,
 			);
 			path = "Guardian Quiz";
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46179DB257422B3002DF623 /* QuestionView.swift in Sources */,
 				F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */,
 				F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */,
 				F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */,

@@ -11,14 +11,28 @@ struct QuizmasterView: View {
   @EnvironmentObject var sharedState: SharedState
 
   var body: some View {
-    VStack {
-      Text("Question 1")
-      Text(sharedState.quiz.questions.first?.question ?? "No questions loaded")
-        .font(.title)
-        .padding()
-      Text("Second screen is " + (sharedState.isSecondScreenVisible ? "visible" : "hidden"))
-        .padding()
+    VStack(alignment: .leading) {
+      QuestionView(question: sharedState.currentQuestion)
+        .padding(.bottom, 20)
+      HStack {
+        if (sharedState.questionIndex > 0) {
+          Button(action: {
+            sharedState.questionIndex -= 1
+          }, label: {
+            Text("Previous")
+          })
+        }
+        Spacer()
+        if (sharedState.questionIndex < sharedState.quiz.questions.count - 1) {
+          Button(action: {
+            sharedState.questionIndex += 1
+          }, label: {
+            Text("Next")
+          })
+        }
+      }
     }
+    .padding()
   }
 }
 
