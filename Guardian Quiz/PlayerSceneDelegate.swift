@@ -22,7 +22,8 @@ class PlayerSceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Create the SwiftUI view that provides the window contents.
     let sharedState = AppDelegate.sharedState
     sharedState.isSecondScreenVisible = true
-    let contentView = PlayerView().environmentObject(sharedState)
+    let contentView = PlayerView()
+      .environmentObject(sharedState)
     self.sharedState = sharedState
 
     // Use a UIHostingController as window root view controller.

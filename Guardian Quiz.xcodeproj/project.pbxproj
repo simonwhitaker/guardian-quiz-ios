@@ -18,6 +18,10 @@
 		F4FE4B252573ABDE00E97C92 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B242573ABDE00E97C92 /* PlayerView.swift */; };
 		F4FE4B2A2573AC2200E97C92 /* PlayerSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */; };
 		F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B2E2573AC5700E97C92 /* SharedState.swift */; };
+		F4FE4B372573AEE400E97C92 /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4B362573AEE400E97C92 /* quiz.json */; };
+		F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */; };
+		F4FE4B412573D74E00E97C92 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B402573D74E00E97C92 /* QuizTests.swift */; };
+		F4FE4B482573D81700E97C92 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,9 @@
 		F4FE4B242573ABDE00E97C92 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneDelegate.swift; sourceTree = "<group>"; };
 		F4FE4B2E2573AC5700E97C92 /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
+		F4FE4B362573AEE400E97C92 /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
+		F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		F4FE4B402573D74E00E97C92 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +112,8 @@
 		F4FE4AEA2573AB5C00E97C92 /* Guardian Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE4B362573AEE400E97C92 /* quiz.json */,
+				F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */,
 				F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */,
 				F4FE4B2E2573AC5700E97C92 /* SharedState.swift */,
 				F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */,
@@ -132,6 +141,7 @@
 			children = (
 				F4FE4B022573AB5D00E97C92 /* Guardian_QuizTests.swift */,
 				F4FE4B042573AB5D00E97C92 /* Info.plist */,
+				F4FE4B402573D74E00E97C92 /* QuizTests.swift */,
 			);
 			path = "Guardian QuizTests";
 			sourceTree = "<group>";
@@ -250,6 +260,7 @@
 			files = (
 				F4FE4AF82573AB5D00E97C92 /* LaunchScreen.storyboard in Resources */,
 				F4FE4AF52573AB5D00E97C92 /* Preview Assets.xcassets in Resources */,
+				F4FE4B372573AEE400E97C92 /* quiz.json in Resources */,
 				F4FE4AF22573AB5D00E97C92 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +288,7 @@
 			files = (
 				F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */,
 				F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */,
+				F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */,
 				F4FE4B2A2573AC2200E97C92 /* PlayerSceneDelegate.swift in Sources */,
 				F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */,
 				F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */,
@@ -288,7 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FE4B412573D74E00E97C92 /* QuizTests.swift in Sources */,
 				F4FE4B032573AB5D00E97C92 /* Guardian_QuizTests.swift in Sources */,
+				F4FE4B482573D81700E97C92 /* Quiz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

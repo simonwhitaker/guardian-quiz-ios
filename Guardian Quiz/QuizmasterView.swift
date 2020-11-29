@@ -11,10 +11,14 @@ struct QuizmasterView: View {
   @EnvironmentObject var sharedState: SharedState
 
   var body: some View {
-    Text("This is the quizmaster view")
-      .padding()
-    Text("Second screen is " + (sharedState.isSecondScreenVisible ? "visible" : "hidden"))
-      .padding()
+    VStack {
+      Text("Question 1")
+      Text(sharedState.quiz.questions.first?.question ?? "No questions loaded")
+        .font(.title)
+        .padding()
+      Text("Second screen is " + (sharedState.isSecondScreenVisible ? "visible" : "hidden"))
+        .padding()
+    }
   }
 }
 
