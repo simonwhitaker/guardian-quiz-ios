@@ -30,41 +30,52 @@ struct QuizmasterView: View {
               sharedState.showAnswersToPlayers = true
             }
           }, label: {
-            Text("Show answer to players")
+            HStack {
+              Image(systemName: "tv")
+              Text("Show answer to players")
+            }
           })
         }
 
         Spacer()
 
         HStack {
-          if (sharedState.questionIndex > 0) {
-            Button(action: {
-              sharedState.showAnswersToPlayers = false
-              sharedState.questionIndex = 0
-            }, label: {
-              Text("First")
-            })
+          Button(action: {
+            sharedState.showAnswersToPlayers = false
+            sharedState.questionIndex = 0
+          }, label: {
+            Image(systemName: "backward.end.fill")
+              .font(.title)
+              .padding()
+          })
+          .disabled(sharedState.questionIndex == 0)
 
-            Button(action: {
-              sharedState.showAnswersToPlayers = false
-              sharedState.questionIndex -= 1
-            }, label: {
-              Text("Previous")
-            })
-          }
+          Button(action: {
+            sharedState.showAnswersToPlayers = false
+            sharedState.questionIndex -= 1
+          }, label: {
+            Image(systemName: "backward.fill")
+              .font(.title)
+              .padding()
+          })
+          .disabled(sharedState.questionIndex == 0)
           Spacer()
-          if (sharedState.questionIndex < quiz.questions.count - 1) {
-            Button(action: {
-              sharedState.showAnswersToPlayers = false
-              sharedState.questionIndex += 1
-            }, label: {
-              Text("Next")
-            })
-          }
+          Button(action: {
+            sharedState.showAnswersToPlayers = false
+            sharedState.questionIndex += 1
+          }, label: {
+            Image(systemName: "forward.fill")
+              .font(.title)
+              .padding()
+          })
+          .disabled(sharedState.questionIndex == quiz.questions.count - 1)
         }
 
         Toggle(isOn: $showAnswersToQuizmaster, label: {
-          Text("Show answers to me")
+          HStack {
+            Image(systemName: "eye")
+            Text("See answers")
+          }
         })
       }
       .padding()

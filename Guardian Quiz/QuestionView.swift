@@ -18,15 +18,16 @@ struct QuestionView: View {
     let headerFont: Font = scaleFactor < 1.1 ? .title3 : Font.system(size: 16 * scaleFactor)
     let bodyFont: Font = scaleFactor < 1.1 ? .title : Font.system(size: 24 * scaleFactor)
 
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 20 * scaleFactor) {
       Text("Question \(question.number)".appending(question.type == .whatLinks ? ": What Links?" : "")).font(headerFont)
       if question.type == .whatLinks {
-        ForEach(question.whatLinksOptions) { opt in
-          HStack(alignment: .top, spacing: 20 * scaleFactor) {
-            Text("-")
-            Text(opt.value)
+        VStack(alignment: .leading, spacing: 6 * scaleFactor) {
+          ForEach(question.whatLinksOptions) { opt in
+            HStack(spacing: 12 * scaleFactor) {
+              Image(systemName:"circle.fill").font(.system(size: 12 * scaleFactor))
+              Text(opt.value).font(bodyFont)
+            }
           }
-          .font(bodyFont)
         }
       } else {
         Text(question.question)
