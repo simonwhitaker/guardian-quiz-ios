@@ -16,7 +16,8 @@ final class SharedState: ObservableObject {
 
   init () {}
 
-  init(quiz: Quiz) {
+  init(quiz: Quiz, showAnswersToPlayers: Bool = false) {
     self.quiz = quiz
+    self.showAnswersToPlayers = showAnswersToPlayers
   }
 }

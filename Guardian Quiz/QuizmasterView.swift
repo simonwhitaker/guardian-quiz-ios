@@ -21,9 +21,21 @@ struct QuizmasterView: View {
     }
     else if let quiz = sharedState.quiz {
       let currentQuestion = quiz.questions[sharedState.questionIndex]
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 50) {
         QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
-          .padding(.bottom, 20)
+
+        if (showAnswersToQuizmaster) {
+          Button(action: {
+            withAnimation {
+              sharedState.showAnswersToPlayers = true
+            }
+          }, label: {
+            Text("Show answer to players")
+          })
+        }
+
+        Spacer()
+
         HStack {
           if (sharedState.questionIndex > 0) {
             Button(action: {
@@ -50,15 +62,9 @@ struct QuizmasterView: View {
             })
           }
         }
+
         Toggle(isOn: $showAnswersToQuizmaster, label: {
           Text("Show answers to me")
-        })
-        Button(action: {
-          withAnimation {
-            sharedState.showAnswersToPlayers = true
-          }
-        }, label: {
-          Text("Show answer to players")
         })
       }
       .padding()

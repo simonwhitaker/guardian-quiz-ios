@@ -12,27 +12,28 @@ let titlePadding = EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
 struct QuestionView: View {
   var question: Question
   var showAnswer: Bool
+  var scaleFactor: CGFloat = 1.0
 
   var body: some View {
+    let headerFont: Font = scaleFactor < 1.1 ? .title3 : Font.system(size: 16 * scaleFactor)
+    let bodyFont: Font = scaleFactor < 1.1 ? .title : Font.system(size: 24 * scaleFactor)
+
     VStack(alignment: .leading, spacing: 10) {
+      Text("Question \(question.number)".appending(question.type == .whatLinks ? ": What Links?" : "")).font(headerFont)
       if question.type == .whatLinks {
-        HStack {
-          Text("Question \(question.number): What Links?")
-        }
         ForEach(question.whatLinksOptions) { opt in
-          HStack(alignment: .top, spacing: 20) {
+          HStack(alignment: .top, spacing: 20 * scaleFactor) {
             Text("-")
             Text(opt.value)
           }
-          .font(.title)
+          .font(bodyFont)
         }
       } else {
-        Text("Question \(question.number)")
         Text(question.question)
-          .font(.title)
+          .font(bodyFont)
       }
       if showAnswer {
-        Text(question.answer).font(.title).foregroundColor(.blue)
+        Text(question.answer).font(bodyFont).foregroundColor(.accentColor)
       }
     }
   }
