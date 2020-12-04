@@ -10,18 +10,17 @@ import Combine
 
 final class SharedState: ObservableObject {
   @Published var isSecondScreenVisible = false
-  @Published var quiz: Quiz
+  @Published var quiz: Quiz?
   @Published var questionIndex: Int = 0
-  var currentQuestion: Question { quiz.questions[questionIndex] }
 
   init() {
-    let fixturePath = Bundle.main.path(forResource: "quiz", ofType: "json")
-
-    do {
-      let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
-      self.quiz = try Quiz.fromJson(json: data)
-    } catch {
-      self.quiz = Quiz(title: "", date: Date(), questions: [])
-    }
+//    let fixturePath = Bundle.main.path(forResource: "quiz", ofType: "json")
+//
+//    do {
+//      let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
+//      self.quiz = try Quiz.fromJson(json: data)
+//    } catch {
+//      self.quiz = Quiz(title: "", date: Date(), questions: [])
+//    }
   }
 }

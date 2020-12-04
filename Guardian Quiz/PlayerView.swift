@@ -11,17 +11,22 @@ struct PlayerView: View {
   @EnvironmentObject var sharedState: SharedState
 
   var body: some View {
-    HStack {
-      VStack(alignment: .leading) {
-        Spacer()
-        QuestionView(question: sharedState.currentQuestion)
+    if let quiz = sharedState.quiz {
+      let currentQuestion = quiz.questions[sharedState.questionIndex]
+      HStack {
+        VStack(alignment: .leading) {
+          Spacer()
+          QuestionView(question: currentQuestion)
+          Spacer()
+        }
         Spacer()
       }
-      Spacer()
+      .padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
+      .foregroundColor(.white)
+      .background(Color.black)
+    } else {
+      Text("Quiz loading")
     }
-    .padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
-    .foregroundColor(.white)
-    .background(Color.black)
   }
 }
 

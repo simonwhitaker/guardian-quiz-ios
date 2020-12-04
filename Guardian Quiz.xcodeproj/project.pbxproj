@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */; };
 		F46179DB257422B3002DF623 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46179DA257422B3002DF623 /* QuestionView.swift */; };
 		F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */; };
 		F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLoader.swift; sourceTree = "<group>"; };
 		F46179DA257422B3002DF623 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		F4FE4AE82573AB5C00E97C92 /* Guardian Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guardian Quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				F4FE4AF92573AB5D00E97C92 /* Info.plist */,
 				F4FE4AF32573AB5D00E97C92 /* Preview Content */,
 				F46179DA257422B3002DF623 /* QuestionView.swift */,
+				F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */,
 			);
 			path = "Guardian Quiz";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				F4FE4B2A2573AC2200E97C92 /* PlayerSceneDelegate.swift in Sources */,
 				F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */,
 				F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */,
+				F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */,
 				F4FE4B252573ABDE00E97C92 /* PlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
