@@ -16,7 +16,7 @@ struct PlayerView: View {
       HStack {
         VStack(alignment: .leading) {
           Spacer()
-          QuestionView(question: currentQuestion)
+          QuestionView(question: currentQuestion, showAnswer: sharedState.showAnswersToPlayers)
           Spacer()
         }
         Spacer()

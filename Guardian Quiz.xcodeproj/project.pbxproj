@@ -124,12 +124,12 @@
 				F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */,
 				F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */,
 				F4FE4B242573ABDE00E97C92 /* PlayerView.swift */,
+				F46179DA257422B3002DF623 /* QuestionView.swift */,
+				F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */,
 				F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */,
 				F4FE4AF62573AB5D00E97C92 /* LaunchScreen.storyboard */,
 				F4FE4AF92573AB5D00E97C92 /* Info.plist */,
 				F4FE4AF32573AB5D00E97C92 /* Preview Content */,
-				F46179DA257422B3002DF623 /* QuestionView.swift */,
-				F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */,
 			);
 			path = "Guardian Quiz";
 			sourceTree = "<group>";

@@ -11,6 +11,7 @@ let titlePadding = EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
 
 struct QuestionView: View {
   var question: Question
+  var showAnswer: Bool
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -30,13 +31,16 @@ struct QuestionView: View {
         Text(question.question)
           .font(.title)
       }
+      if showAnswer {
+        Text(question.answer).font(.title).foregroundColor(.blue)
+      }
     }
   }
 }
 
 struct QuestionView_Previews: PreviewProvider {
   static var previews: some View {
-    QuestionView(question: Question(number: 1, type: .normal, question: "Foo Bar Baz Wibble jidsji dsji djsi dsji djsi djsi disj Boom", answer: "Bar"))
-    QuestionView(question: Question(number: 1, type: .whatLinks, question: "Foo; Bar; Baz; Wibble jidsji dsji djsi dsji djsi djsi disj Boom", answer: "Bar"))
+    QuestionView(question: Question(number: 1, type: .normal, question: "Foo Bar Baz Wibble jidsji dsji djsi dsji djsi djsi disj Boom", answer: "Bar"), showAnswer: true)
+    QuestionView(question: Question(number: 1, type: .whatLinks, question: "Foo; Bar; Baz; Wibble jidsji dsji djsi dsji djsi djsi disj Boom", answer: "Bar"), showAnswer: true)
   }
 }

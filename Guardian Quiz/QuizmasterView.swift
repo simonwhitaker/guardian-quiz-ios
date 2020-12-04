@@ -11,6 +11,7 @@ struct QuizmasterView: View {
   @EnvironmentObject var sharedState: SharedState
   @State var loadingError: Error?
   @State var isLoading: Bool = false
+  @State var showAnswersToQuizmaster: Bool = false
 
   var body: some View {
     if isLoading {
@@ -21,11 +22,19 @@ struct QuizmasterView: View {
     else if let quiz = sharedState.quiz {
       let currentQuestion = quiz.questions[sharedState.questionIndex]
       VStack(alignment: .leading) {
-        QuestionView(question: currentQuestion)
+        QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
           .padding(.bottom, 20)
         HStack {
           if (sharedState.questionIndex > 0) {
             Button(action: {
+              sharedState.showAnswersToPlayers = false
+              sharedState.questionIndex = 0
+            }, label: {
+              Text("First")
+            })
+
+            Button(action: {
+              sharedState.showAnswersToPlayers = false
               sharedState.questionIndex -= 1
             }, label: {
               Text("Previous")
@@ -34,12 +43,23 @@ struct QuizmasterView: View {
           Spacer()
           if (sharedState.questionIndex < quiz.questions.count - 1) {
             Button(action: {
+              sharedState.showAnswersToPlayers = false
               sharedState.questionIndex += 1
             }, label: {
               Text("Next")
             })
           }
         }
+        Toggle(isOn: $showAnswersToQuizmaster, label: {
+          Text("Show answers to me")
+        })
+        Button(action: {
+          withAnimation {
+            sharedState.showAnswersToPlayers = true
+          }
+        }, label: {
+          Text("Show answer to players")
+        })
       }
       .padding()
     } else {
@@ -61,6 +81,6 @@ struct QuizmasterView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     QuizmasterView()
-      .environmentObject(SharedState())
+      .environmentObject(SharedState(quiz: loadFixture()))
   }
 }
