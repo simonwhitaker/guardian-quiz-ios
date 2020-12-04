@@ -24,7 +24,7 @@ struct QuizmasterView: View {
       VStack(alignment: .leading, spacing: 50) {
         QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
 
-        if (showAnswersToQuizmaster) {
+        if (showAnswersToQuizmaster && sharedState.isSecondScreenVisible) {
           Button(action: {
             withAnimation {
               sharedState.showAnswersToPlayers = true
