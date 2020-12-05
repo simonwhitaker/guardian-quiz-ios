@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizmasterView: View {
   @EnvironmentObject var sharedState: SharedState
-  @State var loadingError: Error?
+  @State var loadingError: QuizLoadingError?
   @State var isLoading: Bool = false
   @State var showAnswersToQuizmaster: Bool = false
 
@@ -17,7 +17,12 @@ struct QuizmasterView: View {
     if isLoading {
       Text("Loading...")
     } else if let error = loadingError {
-      Text("Error: \(error.localizedDescription)")
+      switch error {
+      case QuizLoadingError.httpError(let statusCode, let message):
+        Text("HTTP Error \(statusCode): \(message)").padding()
+      default:
+        Text("Error: \(error.localizedDescription)").padding()
+      }
     }
     else if let quiz = sharedState.quiz {
       let currentQuestion = quiz.questions[sharedState.questionIndex]
@@ -79,14 +84,23 @@ struct QuizmasterView: View {
         })
       }
       .padding()
-    } else {
+    }
+
+    if sharedState.quiz == nil && !isLoading {
       Button(action: {
-        do {
-          isLoading = true
-          sharedState.quiz = try loadLatest()
+        isLoading = true
+        loadLatestQuiz() { result in
+          // We're on a background thread now, but apparently that's OK:
+          //
+          // "It is safe to mutate state properties from any thread."
+          // https://developer.apple.com/documentation/swiftui/state
           isLoading = false
-        } catch {
-          loadingError = error
+          switch result {
+          case .failure(let error):
+            loadingError = error
+          case .success(let quiz):
+            sharedState.quiz = quiz
+          }
         }
       }, label: {
         Text("Load Quiz")
