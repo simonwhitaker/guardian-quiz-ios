@@ -90,16 +90,14 @@ struct QuizmasterView: View {
       Button(action: {
         isLoading = true
         loadLatestQuiz() { result in
-          // We're on a background thread now, but apparently that's OK:
-          //
-          // "It is safe to mutate state properties from any thread."
-          // https://developer.apple.com/documentation/swiftui/state
-          isLoading = false
-          switch result {
-          case .failure(let error):
-            loadingError = error
-          case .success(let quiz):
-            sharedState.quiz = quiz
+          DispatchQueue.main.async {
+            isLoading = false
+            switch result {
+            case .failure(let error):
+              loadingError = error
+            case .success(let quiz):
+              sharedState.quiz = quiz
+            }
           }
         }
       }, label: {
