@@ -15,7 +15,7 @@ struct QuizmasterView: View {
 
   var body: some View {
     if isLoading {
-      Text("Loading...")
+      ProgressView()
     } else if let error = loadingError {
       switch error {
       case QuizLoadingError.httpError(let statusCode, let message):
@@ -49,7 +49,7 @@ struct QuizmasterView: View {
             sharedState.showAnswersToPlayers = false
             sharedState.questionIndex = 0
           }, label: {
-            Image(systemName: "backward.end.fill")
+            Image(systemName: "backward.end")
               .font(.title)
               .padding()
           })
@@ -59,7 +59,7 @@ struct QuizmasterView: View {
             sharedState.showAnswersToPlayers = false
             sharedState.questionIndex -= 1
           }, label: {
-            Image(systemName: "backward.fill")
+            Image(systemName: "backward")
               .font(.title)
               .padding()
           })
@@ -69,7 +69,7 @@ struct QuizmasterView: View {
             sharedState.showAnswersToPlayers = false
             sharedState.questionIndex += 1
           }, label: {
-            Image(systemName: "forward.fill")
+            Image(systemName: "forward")
               .font(.title)
               .padding()
           })
@@ -77,10 +77,7 @@ struct QuizmasterView: View {
         }
 
         Toggle(isOn: $showAnswersToQuizmaster, label: {
-          HStack {
-            Image(systemName: "eye")
-            Text("See answers")
-          }
+          Text("See answers")
         })
       }
       .padding()
