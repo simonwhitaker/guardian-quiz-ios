@@ -32,8 +32,7 @@ struct Question: Codable {
 }
 
 struct Quiz: Codable {
-  let title: String
-  let date: Date
+  var title: String? = ""
   let questions: [Question]
 
   static func fromJson(json: Data) throws -> Quiz {

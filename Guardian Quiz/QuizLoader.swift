@@ -61,7 +61,9 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
 
 func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
   // https://saturday-quiz.herokuapp.com/swagger/index.html
-  loadQuizFromURL(url: URL(string: "https://saturday-quiz.herokuapp.com/api/quiz")!, callback: callback)
+  let urlString = "https://saturday-quiz.herokuapp.com/api/quiz"
+//  let urlString = "https://saturday-quiz.herokuapp.com/api/quiz?id=lifeandstyle%2F2020%2Fnov%2F28%2Fwhat-links-oliver-and-moulin-rouge-the-weekend-quiz"
+  loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
 }
 
 func loadFixture() -> Quiz {
@@ -71,6 +73,6 @@ func loadFixture() -> Quiz {
     let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
     return try Quiz.fromJson(json: data)
   } catch {
-    return Quiz(title: "", date: Date(), questions: [])
+    return Quiz(questions: [])
   }
 }
