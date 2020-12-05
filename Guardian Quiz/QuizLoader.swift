@@ -46,9 +46,8 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
           callback(.failure(.parsingError(underlyingError: error)))
         }
       } else {
-        let jsonDecoder = JSONDecoder()
         do {
-          let errorData = try jsonDecoder.decode(QuizServerError.self, from: data)
+          let errorData = try JSONDecoder().decode(QuizServerError.self, from: data)
           callback(.failure(.httpError(statusCode: response.statusCode, message: errorData.errorMessage)))
         } catch {
           callback(.failure(.httpError(statusCode: response.statusCode, message: "Unknown error")))
