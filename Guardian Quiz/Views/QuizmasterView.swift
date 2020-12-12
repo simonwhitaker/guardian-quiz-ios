@@ -13,9 +13,28 @@ struct QuizmasterView: View {
   @State var isLoading: Bool = false
   @State var showAnswersToQuizmaster: Bool = false
 
+
+  func loadQuiz() -> Void {
+    isLoading = true
+    loadLatestQuiz() { result in
+      DispatchQueue.main.async {
+        isLoading = false
+        switch result {
+        case .failure(let error):
+          loadingError = error
+        case .success(let quiz):
+          sharedState.quiz = quiz
+        }
+      }
+    }
+  }
+
   var body: some View {
     if isLoading {
-      ProgressView()
+      HStack {
+        ProgressView()
+        Text("Loading quiz")
+      }
     } else if let error = loadingError {
       switch error {
       case QuizLoadingError.httpError(let statusCode, let message):
@@ -84,21 +103,10 @@ struct QuizmasterView: View {
     }
 
     if sharedState.quiz == nil && !isLoading {
-      Button(action: {
-        isLoading = true
-        loadLatestQuiz() { result in
-          DispatchQueue.main.async {
-            isLoading = false
-            switch result {
-            case .failure(let error):
-              loadingError = error
-            case .success(let quiz):
-              sharedState.quiz = quiz
-            }
-          }
-        }
-      }, label: {
+      Button(action: loadQuiz, label: {
         Text("Load Quiz")
+      }).onAppear(perform: {
+        loadQuiz()
       })
     }
   }
