@@ -29,7 +29,12 @@ typealias LoadQuizCallback = (QuizResultType) -> Void
 
 func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
   let session = URLSession(configuration: .default)
-  let dataTask = session.dataTask(with: url) { data, response, error in
+
+  // Remove cache entries older than 4 hours
+  session.configuration.urlCache?.removeCachedResponses(since: Date(timeIntervalSinceNow: -4*60*60))
+
+  let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10.0)
+  let dataTask = session.dataTask(with: request) { data, response, error in
     if let error = error {
       callback(.failure(.unknownError(underlyingError: error)))
     }
@@ -61,7 +66,6 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
 func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
   // https://saturday-quiz.herokuapp.com/swagger/index.html
   let urlString = "https://saturday-quiz.herokuapp.com/api/quiz"
-//  let urlString = "https://saturday-quiz.herokuapp.com/api/quiz?id=lifeandstyle%2F2020%2Fnov%2F28%2Fwhat-links-oliver-and-moulin-rouge-the-weekend-quiz"
   loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
 }
 
