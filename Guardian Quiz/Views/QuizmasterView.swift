@@ -94,10 +94,17 @@ struct QuizmasterView: View {
           })
           .disabled(sharedState.questionIndex == quiz.questions.count - 1)
         }
-
-        Toggle(isOn: $showAnswersToQuizmaster, label: {
-          Text("See answers")
-        })
+        HStack {
+          Button(action: loadQuiz,
+                 label: {
+                  Image(systemName:"arrow.clockwise.circle")
+                    .font(.title2)
+                    .padding()
+          })
+          Toggle(isOn: $showAnswersToQuizmaster, label: {
+            Text("See answers")
+          })
+        }
       }
       .padding()
     }
