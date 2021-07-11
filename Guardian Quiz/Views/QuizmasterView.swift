@@ -31,7 +31,7 @@ struct QuizmasterView: View {
 
   var body: some View {
     if isLoading {
-      HStack {
+      HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
         ProgressView()
         Text("Loading quiz")
       }
