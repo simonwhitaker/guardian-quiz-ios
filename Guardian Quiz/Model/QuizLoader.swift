@@ -30,7 +30,7 @@ typealias LoadQuizCallback = (QuizResultType) -> Void
 func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
   let session = URLSession(configuration: .default)
 
-  let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+  let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20.0)
   let dataTask = session.dataTask(with: request) { data, response, error in
     if let error = error {
       callback(.failure(.unknownError(underlyingError: error)))
