@@ -61,8 +61,8 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
 }
 
 func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
-  // https://saturday-quiz.herokuapp.com/swagger/index.html
-  let urlString = "https://saturday-quiz.herokuapp.com/api/quiz"
+  // https://fiendish-eaton.herokuapp.com/swagger/index.html
+  let urlString = "https://fiendish-eaton.herokuapp.com/api/quiz"
   loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
 }
 
