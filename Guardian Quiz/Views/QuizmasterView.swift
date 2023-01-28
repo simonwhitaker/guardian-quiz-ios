@@ -8,120 +8,120 @@
 import SwiftUI
 
 struct QuizmasterView: View {
-  @EnvironmentObject var sharedState: SharedState
-  @State var loadingError: QuizLoadingError?
-  @State var isLoading: Bool = false
-  @State var showAnswersToQuizmaster: Bool = false
-
-
-  func loadQuiz() -> Void {
-    isLoading = true
-    loadLatestQuiz() { result in
-      DispatchQueue.main.async {
-        isLoading = false
-        switch result {
-        case .failure(let error):
-          loadingError = error
-        case .success(let quiz):
-          sharedState.quiz = quiz
-        }
-      }
-    }
-  }
-
-  var body: some View {
-    if isLoading {
-      HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
-        ProgressView()
-        Text("Loading quiz")
-      }
-    } else if let error = loadingError {
-      switch error {
-      case QuizLoadingError.httpError(let statusCode, let message):
-        Text("HTTP Error \(statusCode): \(message)").padding()
-      default:
-        Text("Error: \(error.localizedDescription)").padding()
-      }
-    }
-    else if let quiz = sharedState.quiz {
-      let currentQuestion = quiz.questions[sharedState.questionIndex]
-      VStack(alignment: .leading, spacing: 50) {
-        QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
-
-        if (showAnswersToQuizmaster && sharedState.isSecondScreenVisible) {
-          Button(action: {
-            withAnimation {
-              sharedState.showAnswersToPlayers = true
+    @EnvironmentObject var sharedState: SharedState
+    @State var loadingError: QuizLoadingError?
+    @State var isLoading: Bool = false
+    @State var showAnswersToQuizmaster: Bool = false
+    
+    
+    func loadQuiz() -> Void {
+        isLoading = true
+        loadLatestQuiz() { result in
+            DispatchQueue.main.async {
+                isLoading = false
+                switch result {
+                case .failure(let error):
+                    loadingError = error
+                case .success(let quiz):
+                    sharedState.quiz = quiz
+                }
             }
-          }, label: {
-            HStack {
-              Image(systemName: "tv")
-              Text("Show answer to players")
+        }
+    }
+    
+    var body: some View {
+        if isLoading {
+            HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
+                ProgressView()
+                Text("Loading quiz")
             }
-          })
+        } else if let error = loadingError {
+            switch error {
+            case QuizLoadingError.httpError(let statusCode, let message):
+                Text("HTTP Error \(statusCode): \(message)").padding()
+            default:
+                Text("Error: \(error.localizedDescription)").padding()
+            }
         }
-
-        Spacer()
-
-        HStack {
-          Button(action: {
-            sharedState.showAnswersToPlayers = false
-            sharedState.questionIndex = 0
-          }, label: {
-            Image(systemName: "backward.end")
-              .font(.title)
-              .padding()
-          })
-          .disabled(sharedState.questionIndex == 0)
-
-          Button(action: {
-            sharedState.showAnswersToPlayers = false
-            sharedState.questionIndex -= 1
-          }, label: {
-            Image(systemName: "backward")
-              .font(.title)
-              .padding()
-          })
-          .disabled(sharedState.questionIndex == 0)
-          Spacer()
-          Button(action: {
-            sharedState.showAnswersToPlayers = false
-            sharedState.questionIndex += 1
-          }, label: {
-            Image(systemName: "forward")
-              .font(.title)
-              .padding()
-          })
-          .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+        else if let quiz = sharedState.quiz {
+            let currentQuestion = quiz.questions[sharedState.questionIndex]
+            VStack(alignment: .leading, spacing: 50) {
+                QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
+                
+                if (showAnswersToQuizmaster && sharedState.isSecondScreenVisible) {
+                    Button(action: {
+                        withAnimation {
+                            sharedState.showAnswersToPlayers = true
+                        }
+                    }, label: {
+                        HStack {
+                            Image(systemName: "tv")
+                            Text("Show answer to players")
+                        }
+                    })
+                }
+                
+                Spacer()
+                
+                HStack {
+                    Button(action: {
+                        sharedState.showAnswersToPlayers = false
+                        sharedState.questionIndex = 0
+                    }, label: {
+                        Image(systemName: "backward.end")
+                            .font(.title)
+                            .padding()
+                    })
+                    .disabled(sharedState.questionIndex == 0)
+                    
+                    Button(action: {
+                        sharedState.showAnswersToPlayers = false
+                        sharedState.questionIndex -= 1
+                    }, label: {
+                        Image(systemName: "backward")
+                            .font(.title)
+                            .padding()
+                    })
+                    .disabled(sharedState.questionIndex == 0)
+                    Spacer()
+                    Button(action: {
+                        sharedState.showAnswersToPlayers = false
+                        sharedState.questionIndex += 1
+                    }, label: {
+                        Image(systemName: "forward")
+                            .font(.title)
+                            .padding()
+                    })
+                    .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+                }
+                HStack {
+                    Button(action: loadQuiz,
+                           label: {
+                        Image(systemName:"arrow.clockwise.circle")
+                            .font(.title2)
+                            .padding()
+                    })
+                    Toggle(isOn: $showAnswersToQuizmaster, label: {
+                        Text("See answers")
+                    })
+                }
+            }
+            .padding()
         }
-        HStack {
-          Button(action: loadQuiz,
-                 label: {
-                  Image(systemName:"arrow.clockwise.circle")
-                    .font(.title2)
-                    .padding()
-          })
-          Toggle(isOn: $showAnswersToQuizmaster, label: {
-            Text("See answers")
-          })
+        
+        if sharedState.quiz == nil && !isLoading {
+            Button(action: loadQuiz, label: {
+                Text("Load Quiz")
+            }).onAppear(perform: {
+                loadQuiz()
+            })
         }
-      }
-      .padding()
     }
-
-    if sharedState.quiz == nil && !isLoading {
-      Button(action: loadQuiz, label: {
-        Text("Load Quiz")
-      }).onAppear(perform: {
-        loadQuiz()
-      })
-    }
-  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    QuizmasterView()
-      .environmentObject(SharedState(quiz: loadFixture()))
-  }
+    static var previews: some View {
+        QuizmasterView()
+            .environmentObject(SharedState(quiz: loadFixture()))
+    }
 }

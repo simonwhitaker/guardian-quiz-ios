@@ -9,15 +9,15 @@ import Foundation
 import Combine
 
 final class SharedState: ObservableObject {
-  @Published var isSecondScreenVisible = false
-  @Published var quiz: Quiz?
-  @Published var questionIndex: Int = 0
-  @Published var showAnswersToPlayers: Bool = false
-
-  init () {}
-
-  init(quiz: Quiz, showAnswersToPlayers: Bool = false) {
-    self.quiz = quiz
-    self.showAnswersToPlayers = showAnswersToPlayers
-  }
+    @Published var isSecondScreenVisible = false
+    @Published var quiz: Quiz?
+    @Published var questionIndex: Int = 0
+    @Published var showAnswersToPlayers: Bool = false
+    
+    init () {}
+    
+    init(quiz: Quiz, showAnswersToPlayers: Bool = false) {
+        self.quiz = quiz
+        self.showAnswersToPlayers = showAnswersToPlayers
+    }
 }
