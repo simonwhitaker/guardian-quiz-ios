@@ -13,18 +13,18 @@ struct GuardianQuizApp: App {
     @StateObject private var sharedState: SharedState = SharedState()
     @State var additionalWindows: [UIWindow] = []
 
-    private var screenDidConnectPublisher: AnyPublisher<UIScreen, Never> {
+    private var sceneWillConnectPublisher: AnyPublisher<UIWindowScene, Never> {
         NotificationCenter.default
-            .publisher(for: UIScreen.didConnectNotification)
-            .compactMap { $0.object as? UIScreen }
+            .publisher(for: UIScene.willConnectNotification)
+            .compactMap { $0.object as? UIWindowScene }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
 
-    private var screenDidDisconnectPublisher: AnyPublisher<UIScreen, Never> {
+    private var sceneDidDisconnectPublisher: AnyPublisher<UIWindowScene, Never> {
         NotificationCenter.default
-            .publisher(for: UIScreen.didDisconnectNotification)
-            .compactMap { $0.object as? UIScreen }
+            .publisher(for: UIScene.didDisconnectNotification)
+            .compactMap { $0.object as? UIWindowScene }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
@@ -34,22 +34,20 @@ struct GuardianQuizApp: App {
             QuizmasterView()
                 .environmentObject(sharedState)
                 .onReceive(
-                    screenDidConnectPublisher,
-                    perform: screenDidConnect
+                    sceneWillConnectPublisher,
+                    perform: sceneWillConnect
                 )
                 .onReceive(
-                    screenDidDisconnectPublisher,
-                    perform: screenDidDisconnect
+                    sceneDidDisconnectPublisher,
+                    perform: sceneDidDisconnect
                 )
         }
     }
 
-    private func screenDidConnect(_ screen: UIScreen) {
-        let window = UIWindow(frame: screen.bounds)
+    private func sceneWillConnect(_ scene: UIWindowScene) {
+        let window = UIWindow(frame: scene.screen.bounds)
 
-        window.windowScene = UIApplication.shared.connectedScenes
-            .first { ($0 as? UIWindowScene)?.screen == screen }
-        as? UIWindowScene
+        window.windowScene = scene
 
         let view = PlayerView()
             .environmentObject(sharedState)
@@ -61,8 +59,8 @@ struct GuardianQuizApp: App {
         sharedState.isSecondScreenVisible = true
     }
 
-    private func screenDidDisconnect(_ screen: UIScreen) {
-        additionalWindows.removeAll { $0.screen == screen }
+    private func sceneDidDisconnect(_ scene: UIWindowScene) {
+        additionalWindows.removeAll { $0.screen == scene.screen }
         sharedState.isSecondScreenVisible = false
     }
 }
