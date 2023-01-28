@@ -30,7 +30,7 @@ struct PlayerView: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
-    .background(Color.black)
+    .background(Color.black).ignoresSafeArea()
     .foregroundColor(.white)
   }
 }
