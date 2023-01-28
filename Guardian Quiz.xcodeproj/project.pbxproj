@@ -10,8 +10,6 @@
 		F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */; };
 		F46179DB257422B3002DF623 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46179DA257422B3002DF623 /* QuestionView.swift */; };
 		F4AADCFB298543E1004F795E /* GuardianQuizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */; };
-		F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */; };
-		F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */; };
 		F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */; };
 		F4FE4AF22573AB5D00E97C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */; };
 		F4FE4AF52573AB5D00E97C92 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF42573AB5D00E97C92 /* Preview Assets.xcassets */; };
@@ -19,7 +17,6 @@
 		F4FE4B032573AB5D00E97C92 /* Guardian_QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B022573AB5D00E97C92 /* Guardian_QuizTests.swift */; };
 		F4FE4B0E2573AB5D00E97C92 /* Guardian_QuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B0D2573AB5D00E97C92 /* Guardian_QuizUITests.swift */; };
 		F4FE4B252573ABDE00E97C92 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B242573ABDE00E97C92 /* PlayerView.swift */; };
-		F4FE4B2A2573AC2200E97C92 /* PlayerSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */; };
 		F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B2E2573AC5700E97C92 /* SharedState.swift */; };
 		F4FE4B372573AEE400E97C92 /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4B362573AEE400E97C92 /* quiz.json */; };
 		F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */; };
@@ -49,8 +46,6 @@
 		F46179DA257422B3002DF623 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQuizApp.swift; sourceTree = "<group>"; };
 		F4FE4AE82573AB5C00E97C92 /* Guardian Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guardian Quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizmasterSceneDelegate.swift; sourceTree = "<group>"; };
 		F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizmasterView.swift; sourceTree = "<group>"; };
 		F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4FE4AF42573AB5D00E97C92 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -63,7 +58,6 @@
 		F4FE4B0D2573AB5D00E97C92 /* Guardian_QuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian_QuizUITests.swift; sourceTree = "<group>"; };
 		F4FE4B0F2573AB5D00E97C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4FE4B242573ABDE00E97C92 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSceneDelegate.swift; sourceTree = "<group>"; };
 		F4FE4B2E2573AC5700E97C92 /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
 		F4FE4B362573AEE400E97C92 /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
 		F4FE4B3B2573AEFC00E97C92 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -109,9 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				F4FE4AF62573AB5D00E97C92 /* LaunchScreen.storyboard */,
-				F4FE4AEB2573AB5C00E97C92 /* AppDelegate.swift */,
-				F4FE4AED2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift */,
-				F4FE4B292573AC2200E97C92 /* PlayerSceneDelegate.swift */,
 				F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */,
 			);
 			path = "App Structure";
@@ -329,10 +320,7 @@
 			files = (
 				F46179DB257422B3002DF623 /* QuestionView.swift in Sources */,
 				F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */,
-				F4FE4AEC2573AB5C00E97C92 /* AppDelegate.swift in Sources */,
 				F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */,
-				F4FE4B2A2573AC2200E97C92 /* PlayerSceneDelegate.swift in Sources */,
-				F4FE4AEE2573AB5C00E97C92 /* QuizmasterSceneDelegate.swift in Sources */,
 				F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */,
 				F4AADCFB298543E1004F795E /* GuardianQuizApp.swift in Sources */,
 				F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */,
