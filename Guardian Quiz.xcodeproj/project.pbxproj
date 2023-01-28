@@ -14,7 +14,6 @@
 		F4FE4AF22573AB5D00E97C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */; };
 		F4FE4AF52573AB5D00E97C92 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF42573AB5D00E97C92 /* Preview Assets.xcassets */; };
 		F4FE4B032573AB5D00E97C92 /* Guardian_QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B022573AB5D00E97C92 /* Guardian_QuizTests.swift */; };
-		F4FE4B0E2573AB5D00E97C92 /* Guardian_QuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B0D2573AB5D00E97C92 /* Guardian_QuizUITests.swift */; };
 		F4FE4B252573ABDE00E97C92 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B242573ABDE00E97C92 /* PlayerView.swift */; };
 		F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4B2E2573AC5700E97C92 /* SharedState.swift */; };
 		F4FE4B372573AEE400E97C92 /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4B362573AEE400E97C92 /* quiz.json */; };
@@ -25,13 +24,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		F4FE4AFF2573AB5D00E97C92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F4FE4AE02573AB5C00E97C92 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F4FE4AE72573AB5C00E97C92;
-			remoteInfo = "Guardian Quiz";
-		};
-		F4FE4B0A2573AB5D00E97C92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F4FE4AE02573AB5C00E97C92 /* Project object */;
 			proxyType = 1;
@@ -52,9 +44,6 @@
 		F4FE4AFE2573AB5D00E97C92 /* Guardian QuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Guardian QuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FE4B022573AB5D00E97C92 /* Guardian_QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian_QuizTests.swift; sourceTree = "<group>"; };
 		F4FE4B042573AB5D00E97C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4FE4B092573AB5D00E97C92 /* Guardian QuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Guardian QuizUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4FE4B0D2573AB5D00E97C92 /* Guardian_QuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian_QuizUITests.swift; sourceTree = "<group>"; };
-		F4FE4B0F2573AB5D00E97C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4FE4B242573ABDE00E97C92 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		F4FE4B2E2573AC5700E97C92 /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
 		F4FE4B362573AEE400E97C92 /* quiz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quiz.json; sourceTree = "<group>"; };
@@ -71,13 +60,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F4FE4AFB2573AB5D00E97C92 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4FE4B062573AB5D00E97C92 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,7 +110,6 @@
 			children = (
 				F4FE4AEA2573AB5C00E97C92 /* Guardian Quiz */,
 				F4FE4B012573AB5D00E97C92 /* Guardian QuizTests */,
-				F4FE4B0C2573AB5D00E97C92 /* Guardian QuizUITests */,
 				F4FE4AE92573AB5C00E97C92 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,7 +119,6 @@
 			children = (
 				F4FE4AE82573AB5C00E97C92 /* Guardian Quiz.app */,
 				F4FE4AFE2573AB5D00E97C92 /* Guardian QuizTests.xctest */,
-				F4FE4B092573AB5D00E97C92 /* Guardian QuizUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,15 +153,6 @@
 				F4FE4B402573D74E00E97C92 /* QuizTests.swift */,
 			);
 			path = "Guardian QuizTests";
-			sourceTree = "<group>";
-		};
-		F4FE4B0C2573AB5D00E97C92 /* Guardian QuizUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F4FE4B0D2573AB5D00E97C92 /* Guardian_QuizUITests.swift */,
-				F4FE4B0F2573AB5D00E97C92 /* Info.plist */,
-			);
-			path = "Guardian QuizUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,24 +193,6 @@
 			productReference = F4FE4AFE2573AB5D00E97C92 /* Guardian QuizTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F4FE4B082573AB5D00E97C92 /* Guardian QuizUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F4FE4B182573AB5D00E97C92 /* Build configuration list for PBXNativeTarget "Guardian QuizUITests" */;
-			buildPhases = (
-				F4FE4B052573AB5D00E97C92 /* Sources */,
-				F4FE4B062573AB5D00E97C92 /* Frameworks */,
-				F4FE4B072573AB5D00E97C92 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F4FE4B0B2573AB5D00E97C92 /* PBXTargetDependency */,
-			);
-			name = "Guardian QuizUITests";
-			productName = "Guardian QuizUITests";
-			productReference = F4FE4B092573AB5D00E97C92 /* Guardian QuizUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -253,10 +206,6 @@
 						CreatedOnToolsVersion = 12.2;
 					};
 					F4FE4AFD2573AB5D00E97C92 = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = F4FE4AE72573AB5C00E97C92;
-					};
-					F4FE4B082573AB5D00E97C92 = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = F4FE4AE72573AB5C00E97C92;
 					};
@@ -277,7 +226,6 @@
 			targets = (
 				F4FE4AE72573AB5C00E97C92 /* Guardian Quiz */,
 				F4FE4AFD2573AB5D00E97C92 /* Guardian QuizTests */,
-				F4FE4B082573AB5D00E97C92 /* Guardian QuizUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -294,13 +242,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F4FE4AFC2573AB5D00E97C92 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4FE4B072573AB5D00E97C92 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,14 +275,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4FE4B052573AB5D00E97C92 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4FE4B0E2573AB5D00E97C92 /* Guardian_QuizUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -349,11 +282,6 @@
 			isa = PBXTargetDependency;
 			target = F4FE4AE72573AB5C00E97C92 /* Guardian Quiz */;
 			targetProxy = F4FE4AFF2573AB5D00E97C92 /* PBXContainerItemProxy */;
-		};
-		F4FE4B0B2573AB5D00E97C92 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F4FE4AE72573AB5C00E97C92 /* Guardian Quiz */;
-			targetProxy = F4FE4B0A2573AB5D00E97C92 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -566,46 +494,6 @@
 			};
 			name = Release;
 		};
-		F4FE4B192573AB5D00E97C92 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VW9QM42U4U;
-				INFOPLIST_FILE = "Guardian QuizUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.netcetera.Guardian-QuizUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Guardian Quiz";
-			};
-			name = Debug;
-		};
-		F4FE4B1A2573AB5D00E97C92 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VW9QM42U4U;
-				INFOPLIST_FILE = "Guardian QuizUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.netcetera.Guardian-QuizUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Guardian Quiz";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -632,15 +520,6 @@
 			buildConfigurations = (
 				F4FE4B162573AB5D00E97C92 /* Debug */,
 				F4FE4B172573AB5D00E97C92 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F4FE4B182573AB5D00E97C92 /* Build configuration list for PBXNativeTarget "Guardian QuizUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F4FE4B192573AB5D00E97C92 /* Debug */,
-				F4FE4B1A2573AB5D00E97C92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
