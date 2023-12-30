@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */; };
 		F46179DB257422B3002DF623 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46179DA257422B3002DF623 /* QuestionView.swift */; };
+		F462E8662B4083FF00A42C1F /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4B362573AEE400E97C92 /* quiz.json */; };
 		F4AADCFB298543E1004F795E /* GuardianQuizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */; };
 		F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */; };
 		F4FE4AF22573AB5D00E97C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */; };
@@ -208,7 +209,6 @@
 					};
 					F4FE4AFD2573AB5D00E97C92 = {
 						CreatedOnToolsVersion = 12.2;
-						TestTargetID = F4FE4AE72573AB5C00E97C92;
 					};
 				};
 			};
@@ -246,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F462E8662B4083FF00A42C1F /* quiz.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,7 +471,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Guardian Quiz.app/Guardian Quiz";
 			};
 			name = Debug;
 		};
@@ -478,7 +478,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW9QM42U4U;
 				INFOPLIST_FILE = "Guardian QuizTests/Info.plist";
@@ -492,7 +491,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Guardian Quiz.app/Guardian Quiz";
 			};
 			name = Release;
 		};

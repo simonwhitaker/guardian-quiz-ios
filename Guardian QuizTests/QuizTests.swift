@@ -11,7 +11,8 @@ import XCTest
 class QuizTests: XCTestCase {
 
     func testJSONParser() throws {
-        let fixturePath = Bundle.main.path(forResource: "quiz", ofType: "json")
+        let bundle = Bundle(for: type(of: self))
+        let fixturePath = bundle.path(forResource: "quiz", ofType: "json")
         let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
         let quiz = try Quiz.fromJson(json: data)
         XCTAssertNotNil(quiz, "Quiz is not nil")
