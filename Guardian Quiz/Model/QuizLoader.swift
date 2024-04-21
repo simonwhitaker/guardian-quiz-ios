@@ -29,13 +29,13 @@ typealias LoadQuizCallback = (QuizResultType) -> Void
 
 func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
     let session = URLSession(configuration: .default)
-    
+
     let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20.0)
     let dataTask = session.dataTask(with: request) { data, response, error in
         if let error = error {
             callback(.failure(.unknownError(underlyingError: error)))
         }
-        
+
         else if
             let data = data,
             let response = response as? HTTPURLResponse
@@ -61,14 +61,14 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
 }
 
 func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
-    // https://fiendish-eaton.herokuapp.com/swagger/index.html
-    let urlString = "https://fiendish-eaton.herokuapp.com/api/quiz"
+    // https://eaton-bitrot.koyeb.app/swagger/index.html
+    let urlString = "https://eaton-bitrot.koyeb.app/api/quiz"
     loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
 }
 
 func loadFixture() -> Quiz {
     let fixturePath = Bundle.main.path(forResource: "quiz", ofType: "json")
-    
+
     do {
         let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
         return try Quiz.fromJson(json: data)
