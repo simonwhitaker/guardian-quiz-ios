@@ -16,7 +16,7 @@ struct QuestionView: View {
 
     var body: some View {
         let headerFont: Font = scaleFactor < 1.1 ? .title3 : Font.system(size: 16 * scaleFactor)
-        let bodyFont: Font = scaleFactor < 1.1 ? .title : Font.system(size: 20 * scaleFactor)
+        let bodyFont: Font = scaleFactor < 1.1 ? .title2 : Font.system(size: 20 * scaleFactor)
 
         VStack(alignment: .leading, spacing: 20 * scaleFactor) {
             Text("Question \(question.number)".appending(question.type == .whatLinks ? ": What Links" : "")).font(headerFont).opacity(0.7)
