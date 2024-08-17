@@ -12,23 +12,12 @@ enum QuestionType: String, Codable {
     case whatLinks = "WHAT_LINKS"
 }
 
-struct IndexedAnswerOption: Identifiable, Equatable {
-    let id: Int
-    let value: String
-}
-
 struct Question: Codable {
     let number: Int
     let type: QuestionType
     let question: String
+    let whatLinks: [String]
     let answer: String
-    
-    var whatLinksOptions: [IndexedAnswerOption] {
-        return question.replacingOccurrences(of: "\\?$", with: "", options: .regularExpression).split(separator: ";").enumerated().map { (i, s) in
-            let trimmed = s.trimmingCharacters(in: .whitespacesAndNewlines)
-            return IndexedAnswerOption(id: number << 8 + i, value: trimmed)
-        }
-    }
 }
 
 struct Quiz: Codable {

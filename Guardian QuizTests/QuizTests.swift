@@ -22,7 +22,7 @@ class QuizTests: XCTestCase {
 
     func testWhatLinksQuestions() throws {
         let num = 1
-        let q = Question(number: num, type: .whatLinks, question: "foo; bar?; baz?", answer: "")
+        let q = Question(number: num, type: .whatLinks, question: "foo; bar?; baz?", whatLinks: ["foo","bar?","baz"], answer: "")
         let expected: [IndexedAnswerOption] = [
             IndexedAnswerOption(id: num<<8, value: "foo"),
             IndexedAnswerOption(id: num<<8 + 1, value: "bar?"),
