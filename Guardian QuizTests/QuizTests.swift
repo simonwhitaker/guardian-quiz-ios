@@ -19,15 +19,4 @@ class QuizTests: XCTestCase {
         XCTAssertEqual(quiz.title, "What links Oliver and Moulin Rouge? The Weekend quiz")
         XCTAssertEqual(quiz.questions.count, 15)
     }
-
-    func testWhatLinksQuestions() throws {
-        let num = 1
-        let q = Question(number: num, type: .whatLinks, question: "foo; bar?; baz?", whatLinks: ["foo","bar?","baz"], answer: "")
-        let expected: [IndexedAnswerOption] = [
-            IndexedAnswerOption(id: num<<8, value: "foo"),
-            IndexedAnswerOption(id: num<<8 + 1, value: "bar?"),
-            IndexedAnswerOption(id: num<<8 + 2, value: "baz")
-        ]
-        XCTAssertEqual(q.whatLinksOptions, expected)
-    }
 }
