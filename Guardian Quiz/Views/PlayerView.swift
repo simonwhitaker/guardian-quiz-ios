@@ -20,18 +20,28 @@ struct PlayerView: View {
                     QuestionView(
                         question: currentQuestion,
                         showAnswer: sharedState.showAnswersToPlayers,
-                        scaleFactor: scaleFactor
+                        scaleFactor: scaleFactor,
+                        totalScore: sharedState.totalScore()
                     )
                     .padding(50 * scaleFactor)
                 }
             }
             else {
-                Text("Quiz loading").font(Font.system(size: 24 * scaleFactor))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text("Loading quiz").font(Font.system(size: 40 * scaleFactor))
+                        Spacer()
+                    }
+                    Spacer()
+                }
+
             }
         }
         .background(Color.black).ignoresSafeArea()
         .foregroundColor(.white)
+        .tint(.white)
     }
 }
 

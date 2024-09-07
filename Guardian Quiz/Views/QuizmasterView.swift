@@ -24,11 +24,31 @@ struct QuizmasterView: View {
                     loadingError = error
                 case .success(let quiz):
                     sharedState.quiz = quiz
-                }
+                    sharedState.scores = Array(repeating: 0, count: quiz.questions.count)                }
             }
         }
     }
-    
+
+    func toggleScore() -> Void {
+        let idx = sharedState.questionIndex
+        sharedState.scores[idx] = (sharedState.scores[idx] + 2) % 3
+    }
+
+    func scoreImageSystemName() -> String {
+        let idx = sharedState.questionIndex
+        let score = sharedState.scores[idx]
+        switch score {
+        case 0:
+            return "star"
+        case 1:
+            return "star.leadinghalf.filled"
+        case 2:
+            return "star.fill"
+        default:
+            return "questionmark.square.dashed"
+        }
+    }
+
     var body: some View {
         if isLoading {
             HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
@@ -46,8 +66,12 @@ struct QuizmasterView: View {
         else if let quiz = sharedState.quiz {
             let currentQuestion = quiz.questions[sharedState.questionIndex]
             VStack(alignment: .leading, spacing: 50) {
-                QuestionView(question: currentQuestion, showAnswer: showAnswersToQuizmaster)
-                
+                QuestionView(
+                    question: currentQuestion,
+                    showAnswer: showAnswersToQuizmaster,
+                    totalScore: sharedState.totalScore()
+                )
+
                 if (showAnswersToQuizmaster && sharedState.isSecondScreenVisible) {
                     Button(action: {
                         withAnimation {
@@ -93,6 +117,12 @@ struct QuizmasterView: View {
                             .padding()
                     })
                     .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+                    Button(action: toggleScore,
+                           label: {
+                        Image(systemName:scoreImageSystemName())
+                            .font(.title)
+                            .padding()
+                    }).disabled(!showAnswersToQuizmaster)
                 }
                 HStack {
                     Button(action: loadQuiz,
