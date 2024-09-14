@@ -24,6 +24,7 @@ struct PlayerView: View {
                         totalScore: sharedState.totalScore()
                     )
                     .padding(50 * scaleFactor)
+                    Spacer()
                 }
             }
             else {
