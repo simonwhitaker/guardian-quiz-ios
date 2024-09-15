@@ -10,10 +10,11 @@ import SwiftUI
 let titlePadding = EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
 
 struct QuestionView: View {
+    @EnvironmentObject var sharedState: SharedState
+
     var question: Question
     var showAnswer: Bool
     var scaleFactor: CGFloat = 1.0
-    var totalScore: Decimal = 0.0
 
     var body: some View {
         let headerFont: Font = scaleFactor < 1.1 ? .title3 : Font.system(size: 16 * scaleFactor)
@@ -22,8 +23,10 @@ struct QuestionView: View {
         VStack(alignment: .leading, spacing: 20 * scaleFactor) {
             HStack {
                 Text("Question \(question.number)".appending(question.type == .whatLinks ? ": What Links" : "")).font(headerFont).opacity(0.7)
-                Spacer()
-                Text("Score: \(totalScore.formatted())").font(headerFont).opacity(0.7)
+                if sharedState.isScoring {
+                    Spacer()
+                    Text("Score: \(sharedState.totalScore().formatted())").font(headerFont).opacity(0.7)
+                }
             }
             if question.type == .whatLinks {
                 VStack(alignment: .leading, spacing: 6 * scaleFactor) {

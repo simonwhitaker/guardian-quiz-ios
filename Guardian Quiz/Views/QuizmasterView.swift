@@ -11,8 +11,7 @@ struct QuizmasterView: View {
     @EnvironmentObject var sharedState: SharedState
     @State var loadingError: QuizLoadingError?
     @State var isLoading: Bool = false
-    @State var showAnswersToQuizmaster: Bool = false
-    
+
     
     func loadQuiz() -> Void {
         isLoading = true
@@ -68,11 +67,10 @@ struct QuizmasterView: View {
             VStack(alignment: .leading, spacing: 50) {
                 QuestionView(
                     question: currentQuestion,
-                    showAnswer: showAnswersToQuizmaster,
-                    totalScore: sharedState.totalScore()
+                    showAnswer: sharedState.isScoring
                 )
 
-                if (showAnswersToQuizmaster && sharedState.isSecondScreenVisible) {
+                if (sharedState.isScoring && sharedState.isSecondScreenVisible) {
                     Button(action: {
                         withAnimation {
                             sharedState.showAnswersToPlayers = true
@@ -87,53 +85,54 @@ struct QuizmasterView: View {
                 
                 Spacer()
                 
-                HStack {
-                    Button(action: {
-                        sharedState.showAnswersToPlayers = false
-                        sharedState.questionIndex = 0
-                    }, label: {
-                        Image(systemName: "backward.end")
-                            .font(.title)
-                            .padding()
-                    })
-                    .disabled(sharedState.questionIndex == 0)
-                    
-                    Button(action: {
-                        sharedState.showAnswersToPlayers = false
-                        sharedState.questionIndex -= 1
-                    }, label: {
-                        Image(systemName: "backward")
-                            .font(.title)
-                            .padding()
-                    })
-                    .disabled(sharedState.questionIndex == 0)
-                    Spacer()
-                    Button(action: {
-                        sharedState.showAnswersToPlayers = false
-                        sharedState.questionIndex += 1
-                    }, label: {
-                        Image(systemName: "forward")
-                            .font(.title)
-                            .padding()
-                    })
-                    .disabled(sharedState.questionIndex == quiz.questions.count - 1)
-                    Button(action: toggleScore,
-                           label: {
-                        Image(systemName:scoreImageSystemName())
-                            .font(.title)
-                            .padding()
-                    }).disabled(!showAnswersToQuizmaster)
-                }
-                HStack {
-                    Button(action: loadQuiz,
-                           label: {
-                        Image(systemName:"arrow.clockwise.circle")
-                            .font(.title2)
-                            .padding()
-                    })
-                    Toggle(isOn: $showAnswersToQuizmaster, label: {
-                        Text("See answers")
-                    })
+                VStack {
+                    HStack {
+                        Button(action: {
+                            sharedState.showAnswersToPlayers = false
+                            sharedState.questionIndex = 0
+                        }, label: {
+                            Image(systemName: "backward.end")
+                                .font(.title)
+                                .padding()
+                        })
+                        .disabled(sharedState.questionIndex == 0)
+
+                        Button(action: {
+                            sharedState.showAnswersToPlayers = false
+                            sharedState.questionIndex -= 1
+                        }, label: {
+                            Image(systemName: "backward")
+                                .font(.title)
+                                .padding()
+                        })
+                        .disabled(sharedState.questionIndex == 0)
+                        Spacer()
+                        Button(action: {
+                            sharedState.showAnswersToPlayers = false
+                            sharedState.questionIndex += 1
+                        }, label: {
+                            Image(systemName: "forward")
+                                .font(.title)
+                                .padding()
+                        })
+                        .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+                        Button(action: toggleScore,
+                               label: {
+                            Image(systemName:scoreImageSystemName())
+                                .font(.title)
+                                .padding()
+                        }).disabled(!sharedState.isScoring)
+                    }
+                    HStack {
+                        Button(action: loadQuiz) {
+                            Label("Reload", systemImage: "arrow.clockwise.circle")
+                        }
+                        Spacer()
+                        Toggle("See answers",
+                               systemImage: "eye",
+                               isOn: $sharedState.isScoring
+                        ).toggleStyle(.button)
+                    }
                 }
             }
             .padding()

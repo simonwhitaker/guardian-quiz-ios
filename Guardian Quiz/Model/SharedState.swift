@@ -10,6 +10,7 @@ import Combine
 
 final class SharedState: ObservableObject {
     @Published var isSecondScreenVisible = false
+    @Published var isScoring = false
     @Published var quiz: Quiz?
     @Published var questionIndex: Int = 0
     @Published var showAnswersToPlayers: Bool = false

@@ -20,8 +20,7 @@ struct PlayerView: View {
                     QuestionView(
                         question: currentQuestion,
                         showAnswer: sharedState.showAnswersToPlayers,
-                        scaleFactor: scaleFactor,
-                        totalScore: sharedState.totalScore()
+                        scaleFactor: scaleFactor
                     )
                     .padding(50 * scaleFactor)
                     Spacer()
