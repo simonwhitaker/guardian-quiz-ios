@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -202,7 +202,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					F4FE4AE72573AB5C00E97C92 = {
 						CreatedOnToolsVersion = 12.2;
@@ -213,7 +213,6 @@
 				};
 			};
 			buildConfigurationList = F4FE4AE32573AB5C00E97C92 /* Build configuration list for PBXProject "Guardian Quiz" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -221,6 +220,7 @@
 				Base,
 			);
 			mainGroup = F4FE4ADF2573AB5C00E97C92;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = F4FE4AE92573AB5C00E97C92 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -457,7 +457,6 @@
 		F4FE4B162573AB5D00E97C92 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW9QM42U4U;
 				INFOPLIST_FILE = "Guardian QuizTests/Info.plist";
@@ -477,7 +476,6 @@
 		F4FE4B172573AB5D00E97C92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW9QM42U4U;
 				INFOPLIST_FILE = "Guardian QuizTests/Info.plist";
