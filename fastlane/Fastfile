@@ -26,7 +26,11 @@ platform :ios do
       in_house: false # Set to true if you are using an in-house distribution certificate
     )
     increment_build_number(xcodeproj: "Guardian Quiz.xcodeproj")
-    build_app(scheme: "Guardian Quiz")
+    build_app(
+      scheme: "Guardian Quiz",
+      export_method: "app-store",
+      xcargs: "-allowProvisioningUpdates"
+    )
     upload_to_testflight(api_key: api_key)
   end
 end
