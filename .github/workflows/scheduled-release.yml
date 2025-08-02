@@ -1,0 +1,54 @@
+name: Scheduled App Release
+
+on:
+  schedule:
+    # Run at 00:00 UTC on the 1st day of every 2nd month (Jan, Mar, May, Jul, Sep, Nov)
+    - cron: '0 0 1 */2 *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+        
+    - name: Install Fastlane dependencies
+      run: bundle install
+      
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: 'latest-stable'
+        
+    - name: Decode App Store Connect API Key
+      env:
+        API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+      run: |
+        echo "$API_KEY_BASE64" | base64 --decode > AuthKey_RQC9XLTXM9.p8
+        
+    - name: Build and deploy to TestFlight
+      run: |
+        bundle exec fastlane beta
+        
+    - name: Commit version changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'Update build number for TestFlight release'
+        default_author: github_actions
+        
+    - name: Clean up API key
+      run: |
+        rm -f AuthKey_RQC9XLTXM9.p8
