@@ -5,6 +5,7 @@ on:
     # Run at 00:00 UTC on the 1st day of every 2nd month (Jan, Mar, May, Jul, Sep, Nov)
     - cron: '0 0 1 */2 *'
   workflow_dispatch: # Allow manual trigger
+  pull_request: # Temporary for testing
 
 permissions:
   contents: write
@@ -22,7 +23,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.4.5'
+        ruby-version: '3.3.6'
         bundler-cache: true
         
     - name: Install Fastlane dependencies
