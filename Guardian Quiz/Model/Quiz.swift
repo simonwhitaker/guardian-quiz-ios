@@ -18,15 +18,48 @@ struct Question: Codable {
     let question: String
     let whatLinks: [String]
     let answer: String
+    
+    /// Validates that the question has valid data
+    var isValid: Bool {
+        guard number > 0, !question.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+              !answer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return false
+        }
+        
+        if type == .whatLinks {
+            return !whatLinks.isEmpty && whatLinks.allSatisfy { 
+                !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty 
+            }
+        }
+        
+        return true
+    }
 }
 
 struct Quiz: Codable {
     var title: String? = ""
     let questions: [Question]
     
+    /// Validates that the quiz has valid data
+    var isValid: Bool {
+        return !questions.isEmpty && questions.allSatisfy { $0.isValid }
+    }
+    
     static func fromJson(json: Data) throws -> Quiz {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(Quiz.self, from: json)
+        let quiz = try decoder.decode(Quiz.self, from: json)
+        
+        guard quiz.isValid else {
+            throw QuizLoadingError.parsingError(
+                underlyingError: NSError(
+                    domain: "QuizValidation", 
+                    code: -1, 
+                    userInfo: [NSLocalizedDescriptionKey: "Quiz contains invalid questions"]
+                )
+            )
+        }
+        
+        return quiz
     }
 }

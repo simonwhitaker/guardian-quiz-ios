@@ -11,6 +11,7 @@
 		F46179DB257422B3002DF623 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46179DA257422B3002DF623 /* QuestionView.swift */; };
 		F462E8662B4083FF00A42C1F /* quiz.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4B362573AEE400E97C92 /* quiz.json */; };
 		F4AADCFB298543E1004F795E /* GuardianQuizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */; };
+		F4B326FB2EB49FBC004F47B9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B326FA2EB49FBC004F47B9 /* Extensions.swift */; };
 		F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */; };
 		F4FE4AF22573AB5D00E97C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */; };
 		F4FE4AF52573AB5D00E97C92 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FE4AF42573AB5D00E97C92 /* Preview Assets.xcassets */; };
@@ -37,6 +38,8 @@
 		F45C0C4B257A2B69003D66B9 /* QuizLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLoader.swift; sourceTree = "<group>"; };
 		F46179DA257422B3002DF623 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		F4AADCFA298543E1004F795E /* GuardianQuizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQuizApp.swift; sourceTree = "<group>"; };
+		F4B326F92EB49FAC004F47B9 /* QuizModernTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModernTests.swift; sourceTree = "<group>"; };
+		F4B326FA2EB49FBC004F47B9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F4FE4AE82573AB5C00E97C92 /* Guardian Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guardian Quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizmasterView.swift; sourceTree = "<group>"; };
 		F4FE4AF12573AB5D00E97C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 				F4FE4AEF2573AB5C00E97C92 /* QuizmasterView.swift */,
 				F4FE4B242573ABDE00E97C92 /* PlayerView.swift */,
 				F46179DA257422B3002DF623 /* QuestionView.swift */,
+				F4B326FA2EB49FBC004F47B9 /* Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,6 +116,7 @@
 				F4FE4AEA2573AB5C00E97C92 /* Guardian Quiz */,
 				F4FE4B012573AB5D00E97C92 /* Guardian QuizTests */,
 				F4FE4AE92573AB5C00E97C92 /* Products */,
+				F4B326F92EB49FAC004F47B9 /* QuizModernTests.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,7 +207,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					F4FE4AE72573AB5C00E97C92 = {
 						CreatedOnToolsVersion = 12.2;
@@ -260,6 +265,7 @@
 				F46179DB257422B3002DF623 /* QuestionView.swift in Sources */,
 				F4FE4B2F2573AC5700E97C92 /* SharedState.swift in Sources */,
 				F4FE4B3C2573AEFC00E97C92 /* Quiz.swift in Sources */,
+				F4B326FB2EB49FBC004F47B9 /* Extensions.swift in Sources */,
 				F4FE4AF02573AB5C00E97C92 /* QuizmasterView.swift in Sources */,
 				F4AADCFB298543E1004F795E /* GuardianQuizApp.swift in Sources */,
 				F45C0C4C257A2B69003D66B9 /* QuizLoader.swift in Sources */,
@@ -323,6 +329,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = VW9QM42U4U;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -345,6 +352,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -385,6 +393,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = VW9QM42U4U;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -400,6 +409,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -414,7 +424,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"Guardian Quiz/Preview Content\"";
-				DEVELOPMENT_TEAM = VW9QM42U4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Guardian Quiz/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
@@ -438,7 +447,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"Guardian Quiz/Preview Content\"";
-				DEVELOPMENT_TEAM = VW9QM42U4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Guardian Quiz/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
@@ -458,7 +466,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VW9QM42U4U;
 				INFOPLIST_FILE = "Guardian QuizTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -477,7 +484,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VW9QM42U4U;
 				INFOPLIST_FILE = "Guardian QuizTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -19,51 +19,42 @@ struct QuizServerError: Codable {
     var errorMessage: String
 }
 
-enum ResultType<T, E> {
-    case success(T)
-    case failure(E)
-}
+// Removed custom ResultType - Swift's built-in Result type or async/await pattern is preferred
 
-typealias QuizResultType = ResultType<Quiz, QuizLoadingError>
-typealias LoadQuizCallback = (QuizResultType) -> Void
-
-func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
-    let session = URLSession(configuration: .default)
-    
+func loadQuizFromURL(url: URL) async throws -> Quiz {
     let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20.0)
-    let dataTask = session.dataTask(with: request) { data, response, error in
-        if let error = error {
-            callback(.failure(.unknownError(underlyingError: error)))
+    
+    do {
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw QuizLoadingError.unknownError(underlyingError: URLError(.badServerResponse))
         }
         
-        else if
-            let data = data,
-            let response = response as? HTTPURLResponse
-        {
-            if response.statusCode == 200 {
-                do {
-                    let quiz = try Quiz.fromJson(json: data)
-                    callback(.success(quiz))
-                } catch {
-                    callback(.failure(.parsingError(underlyingError: error)))
-                }
-            } else {
-                do {
-                    let errorData = try JSONDecoder().decode(QuizServerError.self, from: data)
-                    callback(.failure(.httpError(statusCode: response.statusCode, message: errorData.errorMessage)))
-                } catch {
-                    callback(.failure(.httpError(statusCode: response.statusCode, message: "Unknown error")))
-                }
+        if httpResponse.statusCode == 200 {
+            return try Quiz.fromJson(json: data)
+        } else {
+            do {
+                let errorData = try JSONDecoder().decode(QuizServerError.self, from: data)
+                throw QuizLoadingError.httpError(statusCode: httpResponse.statusCode, message: errorData.errorMessage)
+            } catch {
+                throw QuizLoadingError.httpError(statusCode: httpResponse.statusCode, message: "Unknown error")
             }
         }
+    } catch let error as QuizLoadingError {
+        throw error
+    } catch {
+        throw QuizLoadingError.unknownError(underlyingError: error)
     }
-    dataTask.resume()
 }
 
-func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
+func loadLatestQuiz() async throws -> Quiz {
     // https://eaton-bitrot.koyeb.app/swagger/index.html
     let urlString = "https://eaton-bitrot.koyeb.app/api/quiz"
-    loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
+    guard let url = URL(string: urlString) else {
+        throw QuizLoadingError.unknownError(underlyingError: URLError(.badURL))
+    }
+    return try await loadQuizFromURL(url: url)
 }
 
 func loadFixture() -> Quiz {

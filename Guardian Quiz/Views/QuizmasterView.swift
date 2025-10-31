@@ -13,28 +13,44 @@ struct QuizmasterView: View {
     @State var isLoading: Bool = false
 
     
-    func loadQuiz() -> Void {
+    func loadQuiz() async {
         isLoading = true
-        loadLatestQuiz() { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                switch result {
-                case .failure(let error):
-                    loadingError = error
-                case .success(let quiz):
-                    sharedState.quiz = quiz
-                    sharedState.scores = Array(repeating: 0, count: quiz.questions.count)                }
-            }
+        loadingError = nil
+        
+        do {
+            let quiz = try await loadLatestQuiz()
+            sharedState.quiz = quiz
+            sharedState.scores = Array(repeating: 0, count: quiz.questions.count)
+        } catch let error as QuizLoadingError {
+            loadingError = error
+        } catch {
+            loadingError = .unknownError(underlyingError: error)
         }
+        
+        isLoading = false
     }
 
     func toggleScore() -> Void {
+        guard let quiz = sharedState.quiz,
+              sharedState.questionIndex < quiz.questions.count,
+              sharedState.questionIndex >= 0 else { return }
+        
         let idx = sharedState.questionIndex
         sharedState.scores[idx] = (sharedState.scores[idx] + 2) % 3
     }
 
     func scoreImageSystemName() -> String {
+        guard let quiz = sharedState.quiz,
+              sharedState.questionIndex < quiz.questions.count,
+              sharedState.questionIndex >= 0 else { 
+            return "questionmark.square.dashed" 
+        }
+        
         let idx = sharedState.questionIndex
+        guard idx < sharedState.scores.count else { 
+            return "questionmark.square.dashed" 
+        }
+        
         let score = sharedState.scores[idx]
         switch score {
         case 0:
@@ -49,101 +65,147 @@ struct QuizmasterView: View {
     }
 
     var body: some View {
-        if isLoading {
-            HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
-                ProgressView()
-                Text("Loading quiz")
-            }
-        } else if let error = loadingError {
-            switch error {
-            case QuizLoadingError.httpError(let statusCode, let message):
-                Text("HTTP Error \(statusCode): \(message)").padding()
-            default:
-                Text("Error: \(error.localizedDescription)").padding()
-            }
-        }
-        else if let quiz = sharedState.quiz {
-            let currentQuestion = quiz.questions[sharedState.questionIndex]
-            VStack(alignment: .leading, spacing: 50) {
-                QuestionView(
-                    question: currentQuestion,
-                    showAnswer: sharedState.isScoring
-                )
-
-                if (sharedState.isScoring && sharedState.isSecondScreenVisible) {
-                    Button(action: {
-                        withAnimation {
-                            sharedState.showAnswersToPlayers = true
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: "tv")
-                            Text("Show answer to players")
-                        }
-                    })
+        VStack {
+            if isLoading {
+                HStack(alignment: .center, spacing: 10) {
+                    ProgressView()
+                    Text("Loading quiz")
                 }
-                
-                Spacer()
-                
-                VStack {
-                    HStack {
-                        Button(action: {
-                            sharedState.showAnswersToPlayers = false
-                            sharedState.questionIndex = 0
-                        }, label: {
-                            Image(systemName: "backward.end")
-                                .font(.title)
-                                .padding()
-                        })
-                        .disabled(sharedState.questionIndex == 0)
-
-                        Button(action: {
-                            sharedState.showAnswersToPlayers = false
-                            sharedState.questionIndex -= 1
-                        }, label: {
-                            Image(systemName: "backward")
-                                .font(.title)
-                                .padding()
-                        })
-                        .disabled(sharedState.questionIndex == 0)
-                        Spacer()
-                        Button(action: {
-                            sharedState.showAnswersToPlayers = false
-                            sharedState.questionIndex += 1
-                        }, label: {
-                            Image(systemName: "forward")
-                                .font(.title)
-                                .padding()
-                        })
-                        .disabled(sharedState.questionIndex == quiz.questions.count - 1)
-                        Button(action: toggleScore,
-                               label: {
-                            Image(systemName:scoreImageSystemName())
-                                .font(.title)
-                                .padding()
-                        }).disabled(!sharedState.isScoring)
+            } else if let error = loadingError {
+                VStack(spacing: 16) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.system(size: 48))
+                        .foregroundColor(.orange)
+                    
+                    switch error {
+                    case QuizLoadingError.httpError(let statusCode, let message):
+                        Text("Server Error")
+                            .font(.headline)
+                        Text("HTTP \(statusCode): \(message)")
+                            .multilineTextAlignment(.center)
+                    case QuizLoadingError.parsingError:
+                        Text("Data Error")
+                            .font(.headline)
+                        Text("Failed to parse quiz data")
+                            .multilineTextAlignment(.center)
+                    case QuizLoadingError.unknownError(let underlyingError):
+                        Text("Connection Error")
+                            .font(.headline)
+                        Text(underlyingError.localizedDescription)
+                            .multilineTextAlignment(.center)
                     }
-                    HStack {
-                        Button(action: loadQuiz) {
-                            Label("Reload", systemImage: "arrow.clockwise.circle")
+                    
+                    Button("Try Again") {
+                        Task {
+                            await loadQuiz()
                         }
-                        Spacer()
-                        Toggle("See answers",
-                               systemImage: "eye",
-                               isOn: $sharedState.isScoring
-                        ).toggleStyle(.button)
                     }
+                    .buttonStyle(.borderedProminent)
+                }
+                .padding()
+            } else if let quiz = sharedState.quiz {
+                if let currentQuestion = sharedState.currentQuestion {
+                    VStack(alignment: .leading, spacing: 50) {
+                        QuestionView(
+                            question: currentQuestion,
+                            showAnswer: sharedState.isScoring
+                        )
+
+                        if (sharedState.isScoring && sharedState.isSecondScreenVisible) {
+                            Button(action: {
+                                withAnimation {
+                                    sharedState.showAnswersToPlayers = true
+                                }
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "tv")
+                                    Text("Show answer to players")
+                                }
+                            })
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            HStack {
+                                Button(action: {
+                                    sharedState.showAnswersToPlayers = false
+                                    sharedState.questionIndex = 0
+                                }, label: {
+                                    Image(systemName: "backward.end")
+                                        .font(.title)
+                                        .padding()
+                                })
+                                .disabled(sharedState.questionIndex == 0)
+                                .accessibilityLabel("Go to first question")
+
+                                Button(action: {
+                                    sharedState.showAnswersToPlayers = false
+                                    sharedState.questionIndex -= 1
+                                }, label: {
+                                    Image(systemName: "backward")
+                                        .font(.title)
+                                        .padding()
+                                })
+                                .disabled(sharedState.questionIndex == 0)
+                                .accessibilityLabel("Previous question")
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    sharedState.showAnswersToPlayers = false
+                                    sharedState.questionIndex += 1
+                                }, label: {
+                                    Image(systemName: "forward")
+                                        .font(.title)
+                                        .padding()
+                                })
+                                .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+                                .accessibilityLabel("Next question")
+                                
+                                Button(action: toggleScore,
+                                       label: {
+                                    Image(systemName:scoreImageSystemName())
+                                        .font(.title)
+                                        .padding()
+                                })
+                                .disabled(!sharedState.isScoring)
+                                .accessibilityLabel("Toggle score")
+                            }
+                            HStack {
+                                Button(action: {
+                                    Task {
+                                        await loadQuiz()
+                                    }
+                                }) {
+                                    Label("Reload", systemImage: "arrow.clockwise.circle")
+                                }
+                                Spacer()
+                                Toggle("See answers",
+                                       systemImage: "eye",
+                                       isOn: $sharedState.isScoring
+                                ).toggleStyle(.button)
+                            }
+                        }
+                    }
+                    .padding()
+                } else {
+                    Text("Invalid question index")
+                        .foregroundColor(.red)
+                        .padding()
+                }
+            } else {
+                Button(action: {
+                    Task {
+                        await loadQuiz()
+                    }
+                }, label: {
+                    Text("Load Quiz")
+                })
+                .task {
+                    await loadQuiz()
                 }
             }
-            .padding()
-        }
-        
-        if sharedState.quiz == nil && !isLoading {
-            Button(action: loadQuiz, label: {
-                Text("Load Quiz")
-            }).onAppear(perform: {
-                loadQuiz()
-            })
         }
     }
 }
