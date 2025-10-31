@@ -50,7 +50,7 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(question: Question(number: 1, type: .normal, question: "Foo Bar Baz Wibble jidsji dsji djsi dsji djsi djsi disj Boom", whatLinks: [], answer: "Bar"), showAnswer: true)
-        QuestionView(question: Question(number: 1, type: .whatLinks, question: "Foo; Bar; Baz; Wibble jidsji dsji djsi dsji djsi djsi disj Boom", whatLinks: ["Foo", "Bar", "Baz", "Wibble jidsji dsji djsi dsji djsi djsi disj Boom"], answer: "Bar"), showAnswer: true)
+        QuestionView(question: Question(number: 1, type: .normal, question: "Foo Bar Baz Wibble jidsji dsji djsi dsji djsi djsi disj Boom", whatLinks: [], answer: "Bar"), showAnswer: true).environmentObject(SharedState())
+        QuestionView(question: Question(number: 1, type: .whatLinks, question: "Foo; Bar; Baz; Wibble jidsji dsji djsi dsji djsi djsi disj Boom", whatLinks: ["Foo", "Bar", "Baz", "Wibble jidsji dsji djsi dsji djsi djsi disj Boom"], answer: "Bar"), showAnswer: true).environmentObject(SharedState())
     }
 }
