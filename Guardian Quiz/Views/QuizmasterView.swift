@@ -202,9 +202,11 @@ struct QuizmasterView: View {
                 }, label: {
                     Text("Load Quiz")
                 })
-                .task {
-                    await loadQuiz()
-                }
+            }
+        }
+        .task {
+            if sharedState.quiz == nil {
+                await loadQuiz()
             }
         }
     }
