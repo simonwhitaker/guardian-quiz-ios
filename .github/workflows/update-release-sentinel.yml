@@ -1,0 +1,31 @@
+# This workflow creates a new commit every 2 months so that Xcode Cloud
+# triggers a build. Xcode Cloud has a schedule trigger option, but its
+# slowest cadence is once a week — far more frequent than we need. We only
+# need to rebuild before the last TestFlight build expires, which happens
+# 3 months after release. A commit every 2 months keeps us well within
+# that window.
+name: Trigger a release
+
+on:
+  schedule:
+    - cron: "0 0 1 */2 *" # midnight on the 1st of every other month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-sentinel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update timestamp
+        run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .release-sentinel
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .release-sentinel
+          git diff --staged --quiet || git commit -m "Update release sentinel timestamp" && git push
