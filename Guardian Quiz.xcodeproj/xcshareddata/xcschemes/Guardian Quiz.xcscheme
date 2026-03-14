@@ -38,16 +38,6 @@
                ReferencedContainer = "container:Guardian Quiz.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F4FE4B082573AB5D00E97C92"
-               BuildableName = "Guardian QuizUITests.xctest"
-               BlueprintName = "Guardian QuizUITests"
-               ReferencedContainer = "container:Guardian Quiz.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
