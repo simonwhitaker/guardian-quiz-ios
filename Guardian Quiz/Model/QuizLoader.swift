@@ -49,8 +49,8 @@ func loadQuizFromURL(url: URL) async throws -> Quiz {
 }
 
 func loadLatestQuiz() async throws -> Quiz {
-    // https://eaton-bitrot.koyeb.app/swagger/index.html
-    let urlString = "https://eaton-bitrot.koyeb.app/api/quiz"
+    // https://quiz.bitrot.net/swagger/index.html
+    let urlString = "https://quiz.bitrot.net/api/quiz"
     guard let url = URL(string: urlString) else {
         throw QuizLoadingError.unknownError(underlyingError: URLError(.badURL))
     }
