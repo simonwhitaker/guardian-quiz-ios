@@ -61,8 +61,8 @@ func loadQuizFromURL(url: URL, callback: @escaping LoadQuizCallback) {
 }
 
 func loadLatestQuiz(callback: @escaping LoadQuizCallback) {
-    // https://eaton-bitrot.koyeb.app/swagger/index.html
-    let urlString = "https://eaton-bitrot.koyeb.app/api/quiz"
+    // https://quiz.bitrot.net/swagger/index.html
+    let urlString = "https://quiz.bitrot.net/api/quiz"
     loadQuizFromURL(url: URL(string: urlString)!, callback: callback)
 }
 
