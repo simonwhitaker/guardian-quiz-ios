@@ -1,14 +1,12 @@
-# This workflow creates a new commit every 2 months so that Xcode Cloud
-# triggers a build. Xcode Cloud has a schedule trigger option, but its
-# slowest cadence is once a week — far more frequent than we need. We only
-# need to rebuild before the last TestFlight build expires, which happens
-# 3 months after release. A commit every 2 months keeps us well within
-# that window.
+# This workflow creates a new commit every month so that Xcode Cloud triggers a build. Xcode Cloud has a schedule
+# trigger option, but its slowest cadence is once a week — far more frequent than we need. We only need to rebuild
+# before the last TestFlight build expires, which happens 3 months after release. A commit every month keeps us well
+# within that window.
 name: Trigger a release
 
 on:
   schedule:
-    - cron: "0 0 1 */2 *" # midnight on the 1st of every other month
+    - cron: "0 0 1 * *" # midnight on the 1st of the month
   workflow_dispatch:
 
 permissions:
