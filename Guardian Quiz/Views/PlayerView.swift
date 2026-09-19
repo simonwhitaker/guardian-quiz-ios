@@ -45,13 +45,12 @@ struct PlayerView: View {
     }
 }
 
-struct PlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayerView()
-            .environmentObject(SharedState(quiz: loadFixture(), showAnswersToPlayers: true))
-            .previewLayout(.fixed(width: 1920, height: 1080))
-        PlayerView()
-            .environmentObject(SharedState())
-            .previewLayout(.fixed(width: 1920, height: 1080))
-    }
+#Preview("Quiz loaded", traits: .fixedLayout(width: 1920, height: 1080)) {
+    PlayerView()
+        .environmentObject(SharedState(quiz: loadFixture(), showAnswersToPlayers: true))
+}
+
+#Preview("Loading", traits: .fixedLayout(width: 1920, height: 1080)) {
+    PlayerView()
+        .environmentObject(SharedState())
 }
