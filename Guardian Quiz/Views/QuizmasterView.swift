@@ -65,6 +65,49 @@ struct QuizmasterView: View {
     }
 
     var body: some View {
+        NavigationStack {
+            content
+                .navigationTitle(navigationTitle)
+                .toolbarTitleDisplayMode(.inline)
+                .toolbar {
+                    if sharedState.isScoring && sharedState.currentQuestion != nil {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Text("\(sharedState.totalScore().formatted()) / \(sharedState.totalQuestions.formatted())")
+                                .fixedSize()
+                        }
+                        .sharedBackgroundVisibility(.hidden)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Toggle("See answers",
+                               systemImage: "eye",
+                               isOn: $sharedState.isScoring
+                        ).toggleStyle(.button)
+                            .disabled(sharedState.quiz == nil)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            Task {
+                                await loadQuiz()
+                            }
+                        }, label: {
+                            Label("Reload", systemImage: "arrow.clockwise.circle")
+                        })
+                        .disabled(isLoading)
+                    }
+                }
+        }
+    }
+
+    var navigationTitle: String {
+        guard let question = sharedState.currentQuestion else {
+            return "Guardian Quiz"
+        }
+        return question.type == .whatLinks
+            ? "Question \(question.number): What Links"
+            : "Question \(question.number)"
+    }
+
+    var content: some View {
         VStack {
             if isLoading {
                 HStack(alignment: .center, spacing: 10) {
@@ -108,7 +151,8 @@ struct QuizmasterView: View {
                     VStack(alignment: .leading, spacing: 50) {
                         QuestionView(
                             question: currentQuestion,
-                            showAnswer: sharedState.isScoring
+                            showAnswer: sharedState.isScoring,
+                            showsHeader: false
                         )
 
                         if (sharedState.isScoring && sharedState.isSecondScreenVisible) {
@@ -126,7 +170,6 @@ struct QuizmasterView: View {
                         
                         Spacer()
                         
-                        VStack {
                             HStack {
                                 Button(action: {
                                     sharedState.showAnswersToPlayers = false
@@ -172,22 +215,8 @@ struct QuizmasterView: View {
                                 .disabled(!sharedState.isScoring)
                                 .accessibilityLabel("Toggle score")
                             }
-                            HStack {
-                                Button(action: {
-                                    Task {
-                                        await loadQuiz()
-                                    }
-                                }) {
-                                    Label("Reload", systemImage: "arrow.clockwise.circle")
-                                }
-                                Spacer()
-                                Toggle("See answers",
-                                       systemImage: "eye",
-                                       isOn: $sharedState.isScoring
-                                ).toggleStyle(.button)
-                            }
                         }
-                    }
+                    
                     .padding()
                 } else {
                     Text("Invalid question index")

@@ -24,6 +24,13 @@ extension SharedState {
         return question
     }
     
+    var totalQuestions: Int {
+        guard let quiz = quiz else {
+            return 0
+        }
+        return quiz.questions.count
+    }
+    
     /// Safe access to current score
     var currentScore: Int8 {
         guard let score = scores[safe: questionIndex] else { 
