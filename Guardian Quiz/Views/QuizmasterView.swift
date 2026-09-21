@@ -12,21 +12,23 @@ struct QuizmasterView: View {
     @State var loadingError: QuizLoadingError?
     @State var isLoading: Bool = false
 
-    
-    func loadQuiz() async {
-        isLoading = true
-        loadingError = nil
-        
+
+    func loadQuiz(showsLoadingView: Bool = true) async {
+        if showsLoadingView {
+            isLoading = true
+        }
+
         do {
             let quiz = try await loadLatestQuiz()
             sharedState.quiz = quiz
             sharedState.scores = Array(repeating: 0, count: quiz.questions.count)
+            loadingError = nil
         } catch let error as QuizLoadingError {
             loadingError = error
         } catch {
             loadingError = .unknownError(underlyingError: error)
         }
-        
+
         isLoading = false
     }
 
@@ -34,7 +36,7 @@ struct QuizmasterView: View {
         guard let quiz = sharedState.quiz,
               sharedState.questionIndex < quiz.questions.count,
               sharedState.questionIndex >= 0 else { return }
-        
+
         let idx = sharedState.questionIndex
         sharedState.scores[idx] = (sharedState.scores[idx] + 2) % 3
     }
@@ -42,15 +44,15 @@ struct QuizmasterView: View {
     func scoreImageSystemName() -> String {
         guard let quiz = sharedState.quiz,
               sharedState.questionIndex < quiz.questions.count,
-              sharedState.questionIndex >= 0 else { 
-            return "questionmark.square.dashed" 
+              sharedState.questionIndex >= 0 else {
+            return "questionmark.square.dashed"
         }
-        
+
         let idx = sharedState.questionIndex
-        guard idx < sharedState.scores.count else { 
-            return "questionmark.square.dashed" 
+        guard idx < sharedState.scores.count else {
+            return "questionmark.square.dashed"
         }
-        
+
         let score = sharedState.scores[idx]
         switch score {
         case 0:
@@ -66,7 +68,19 @@ struct QuizmasterView: View {
 
     var body: some View {
         NavigationStack {
-            content
+            GeometryReader { proxy in
+                ScrollView {
+                    content
+                        .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+                }
+                .refreshable {
+                    // Run in an unstructured Task so SwiftUI can't cancel the
+                    // request when state changes redraw the view mid-refresh.
+                    await Task {
+                        await loadQuiz(showsLoadingView: false)
+                    }.value
+                }
+            }
                 .navigationTitle(navigationTitle)
                 .toolbarTitleDisplayMode(.inline)
                 .toolbar {
@@ -83,16 +97,6 @@ struct QuizmasterView: View {
                                isOn: $sharedState.isScoring
                         ).toggleStyle(.button)
                             .disabled(sharedState.quiz == nil)
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            Task {
-                                await loadQuiz()
-                            }
-                        }, label: {
-                            Label("Reload", systemImage: "arrow.clockwise.circle")
-                        })
-                        .disabled(isLoading)
                     }
                 }
         }
@@ -119,7 +123,7 @@ struct QuizmasterView: View {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.system(size: 48))
                         .foregroundColor(.orange)
-                    
+
                     switch error {
                     case QuizLoadingError.httpError(let statusCode, let message):
                         Text("Server Error")
@@ -137,7 +141,7 @@ struct QuizmasterView: View {
                         Text(underlyingError.localizedDescription)
                             .multilineTextAlignment(.center)
                     }
-                    
+
                     Button("Try Again") {
                         Task {
                             await loadQuiz()
@@ -167,9 +171,9 @@ struct QuizmasterView: View {
                                 }
                             })
                         }
-                        
+
                         Spacer()
-                        
+
                         HStack {
                             Button(action: {
                                 sharedState.showAnswersToPlayers = false
