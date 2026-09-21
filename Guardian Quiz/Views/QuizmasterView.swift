@@ -19,9 +19,12 @@ struct QuizmasterView: View {
         }
 
         do {
+            let currentQuizId = sharedState.quiz?.id
             let quiz = try await loadLatestQuiz()
             sharedState.quiz = quiz
-            sharedState.scores = Array(repeating: 0, count: quiz.questions.count)
+            if quiz.id != currentQuizId {
+                sharedState.scores = Array(repeating: 0, count: quiz.questions.count)
+            }
             loadingError = nil
         } catch let error as QuizLoadingError {
             loadingError = error

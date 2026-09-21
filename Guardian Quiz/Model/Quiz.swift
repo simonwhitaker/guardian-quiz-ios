@@ -37,6 +37,7 @@ struct Question: Codable {
 }
 
 struct Quiz: Codable {
+    var id: String
     var title: String? = ""
     let questions: [Question]
     

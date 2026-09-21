@@ -29,7 +29,7 @@ struct QuizTests {
             Question(number: 1, type: .normal, question: "Test 1", whatLinks: [], answer: "Answer 1"),
             Question(number: 2, type: .normal, question: "Test 2", whatLinks: [], answer: "Answer 2")
         ]
-        let quiz = Quiz(title: "Test Quiz", questions: questions)
+        let quiz = Quiz(id: "test/quiz", title: "Test Quiz", questions: questions)
         let sharedState = SharedState(quiz: quiz)
 
         // Initial state

@@ -64,6 +64,6 @@ func loadFixture() -> Quiz {
         let data = try Data(contentsOf: URL(fileURLWithPath: fixturePath!))
         return try Quiz.fromJson(json: data)
     } catch {
-        return Quiz(questions: [])
+        return Quiz(id: "test-quiz", questions: [])
     }
 }
