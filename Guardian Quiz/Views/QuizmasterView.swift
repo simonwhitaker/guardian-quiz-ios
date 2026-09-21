@@ -170,53 +170,52 @@ struct QuizmasterView: View {
                         
                         Spacer()
                         
-                            HStack {
-                                Button(action: {
-                                    sharedState.showAnswersToPlayers = false
-                                    sharedState.questionIndex = 0
-                                }, label: {
-                                    Image(systemName: "backward.end")
-                                        .font(.title)
-                                        .padding()
-                                })
-                                .disabled(sharedState.questionIndex == 0)
-                                .accessibilityLabel("Go to first question")
+                        HStack {
+                            Button(action: {
+                                sharedState.showAnswersToPlayers = false
+                                sharedState.questionIndex = 0
+                            }, label: {
+                                Image(systemName: "backward.end")
+                                    .font(.title)
+                                    .padding()
+                            })
+                            .disabled(sharedState.questionIndex == 0)
+                            .accessibilityLabel("Go to first question")
 
-                                Button(action: {
-                                    sharedState.showAnswersToPlayers = false
-                                    sharedState.questionIndex -= 1
-                                }, label: {
-                                    Image(systemName: "backward")
-                                        .font(.title)
-                                        .padding()
-                                })
-                                .disabled(sharedState.questionIndex == 0)
-                                .accessibilityLabel("Previous question")
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    sharedState.showAnswersToPlayers = false
-                                    sharedState.questionIndex += 1
-                                }, label: {
-                                    Image(systemName: "forward")
-                                        .font(.title)
-                                        .padding()
-                                })
-                                .disabled(sharedState.questionIndex == quiz.questions.count - 1)
-                                .accessibilityLabel("Next question")
-                                
-                                Button(action: toggleScore,
-                                       label: {
-                                    Image(systemName:scoreImageSystemName())
-                                        .font(.title)
-                                        .padding()
-                                })
-                                .disabled(!sharedState.isScoring)
-                                .accessibilityLabel("Toggle score")
-                            }
+                            Button(action: {
+                                sharedState.showAnswersToPlayers = false
+                                sharedState.questionIndex -= 1
+                            }, label: {
+                                Image(systemName: "backward")
+                                    .font(.title)
+                                    .padding()
+                            })
+                            .disabled(sharedState.questionIndex == 0)
+                            .accessibilityLabel("Previous question")
+
+                            Spacer()
+
+                            Button(action: {
+                                sharedState.showAnswersToPlayers = false
+                                sharedState.questionIndex += 1
+                            }, label: {
+                                Image(systemName: "forward")
+                                    .font(.title)
+                                    .padding()
+                            })
+                            .disabled(sharedState.questionIndex == quiz.questions.count - 1)
+                            .accessibilityLabel("Next question")
+
+                            Button(action: toggleScore,
+                                   label: {
+                                Image(systemName:scoreImageSystemName())
+                                    .font(.title)
+                                    .padding()
+                            })
+                            .disabled(!sharedState.isScoring)
+                            .accessibilityLabel("Toggle score")
                         }
-                    
+                    }
                     .padding()
                 } else {
                     Text("Invalid question index")
