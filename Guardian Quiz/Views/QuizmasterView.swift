@@ -159,7 +159,7 @@ struct QuizmasterView: View {
                         QuestionView(
                             question: currentQuestion,
                             showAnswer: sharedState.isScoring,
-                            showsHeader: false
+                            showHeader: false
                         )
 
                         if (sharedState.isScoring && sharedState.isSecondScreenVisible) {

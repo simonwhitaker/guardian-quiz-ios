@@ -36,7 +36,6 @@ struct PlayerView: View {
                     }
                     Spacer()
                 }
-
             }
         }
         .background(Color.black).ignoresSafeArea()

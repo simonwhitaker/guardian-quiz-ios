@@ -15,14 +15,14 @@ struct QuestionView: View {
     var question: Question
     var showAnswer: Bool
     var scaleFactor: CGFloat = 1.0
-    var showsHeader: Bool = true
+    var showHeader: Bool = true
 
     var body: some View {
         let headerFont: Font = scaleFactor < 1.1 ? .title3 : Font.system(size: 16 * scaleFactor)
         let bodyFont: Font = scaleFactor < 1.1 ? .title2 : Font.system(size: 20 * scaleFactor)
 
         VStack(alignment: .leading, spacing: 20 * scaleFactor) {
-            if showsHeader {
+            if showHeader {
                 HStack {
                     Text("Question \(question.number)".appending(question.type == .whatLinks ? ": What Links" : "")).font(headerFont).opacity(0.7)
                     if sharedState.isScoring {
