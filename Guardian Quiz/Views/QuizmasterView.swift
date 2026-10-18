@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizmasterView: View {
     @EnvironmentObject var sharedState: SharedState
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @State var loadingError: QuizLoadingError?
     @State var isLoading: Bool = false
 
@@ -69,11 +71,23 @@ struct QuizmasterView: View {
         }
     }
 
+    /// Whether to show the question and answer side by side. True when the
+    /// window is regular in both size classes (e.g. an unfolded iPhone Duo or
+    /// an iPad) and wider than it is tall. A folded iPhone Duo or a Max-size
+    /// iPhone in landscape is compact in height, so it keeps the stacked
+    /// layout. Derived from the local size rather than device orientation so
+    /// it tracks the window as it resizes or folds.
+    func usesSideBySideLayout(for size: CGSize) -> Bool {
+        horizontalSizeClass == .regular
+            && verticalSizeClass == .regular
+            && size.width > size.height
+    }
+
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
                 ScrollView {
-                    content
+                    content(sideBySide: usesSideBySideLayout(for: proxy.size))
                         .frame(maxWidth: .infinity, minHeight: proxy.size.height)
                 }
                 .refreshable {
@@ -114,7 +128,7 @@ struct QuizmasterView: View {
             : "Question \(question.number)"
     }
 
-    var content: some View {
+    func content(sideBySide: Bool) -> some View {
         VStack {
             if isLoading {
                 HStack(alignment: .center, spacing: 10) {
@@ -159,7 +173,8 @@ struct QuizmasterView: View {
                         QuestionView(
                             question: currentQuestion,
                             showAnswer: sharedState.isScoring,
-                            showHeader: false
+                            showHeader: false,
+                            sideBySide: sideBySide
                         )
 
                         if (sharedState.isScoring && sharedState.isSecondScreenVisible) {
@@ -252,4 +267,11 @@ struct ContentView_Previews: PreviewProvider {
         QuizmasterView()
             .environmentObject(SharedState(quiz: loadFixture()))
     }
+}
+
+#Preview("Scoring") {
+    let state = SharedState(quiz: loadFixture())
+    state.isScoring = true
+    return QuizmasterView()
+        .environmentObject(state)
 }
